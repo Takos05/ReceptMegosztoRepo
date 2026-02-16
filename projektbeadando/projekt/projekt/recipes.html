@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>ReceptMegosztó – Receptek</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="logo">🍽️ ReceptMegosztó</div>
+
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+
+    <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Főoldal</a></li>
+        <li><a href="#recipes" class="active">Receptek</a></li>
+        <li><a href="#upload">Feltöltés</a></li>
+    </ul>
+
+    <div class="nav-actions">
+        <button onclick="toggleDarkMode()">🌙</button>
+        <button onclick="toggleAdmin()">👤 Admin</button>
+    </div>
+</nav>
+
+<!-- RECEPTEK -->
+<section id="recipes" class="container">
+    <h1>🍲 Receptek a világ körül</h1>
+
+    <!-- SZŰRŐ -->
+    <div class="filter-box">
+        <label for="countryFilter"><strong>🌍 Szűrés ország szerint:</strong></label><br>
+        <select id="countryFilter" onchange="filterRecipes()">
+        </select>
+    </div>
+
+    <div class="recipes-grid" id="recipesGrid"></div>
+</section>
+
+<!-- FELTÖLTÉS -->
+<section id="upload" class="container">
+    <h2 id="formTitle">📤 Recept feltöltése</h2>
+
+    <form class="upload-form" onsubmit="handleSubmit(event)">
+        <input type="text" id="recipeName" placeholder="Recept neve" required>
+
+        <textarea id="recipeDesc" placeholder="Recept leírása" required></textarea>
+
+        <input type="text" id="recipeTime" placeholder="Elkészítési idő (pl. 45 perc)" required>
+
+        <!-- ORSZÁG + ZÁSZLÓ -->
+        <select id="recipeCountry" required>
+            <option value="">🌍 Ország kiválasztása</option>
+            <option value="Magyarország">🇭🇺 Magyarország</option>
+            <option value="Olaszország">🇮🇹 Olaszország</option>
+            <option value="Mexikó">🇲🇽 Mexikó</option>
+            <option value="Japán">🇯🇵 Japán</option>
+            <option value="India">🇮🇳 India</option>
+            <option value="USA">🇺🇸 USA</option>
+            <option value="Kína">🇨🇳 Kína</option>
+        </select>
+
+        <input type="hidden" id="editIndex">
+
+        <button type="submit" id="submitBtn">Feltöltés</button>
+        <button type="button" id="cancelBtn" onclick="cancelEdit()" style="display:none;">
+            Mégse
+        </button>
+    </form>
+</section>
+
+<!-- ADMIN PANEL -->
+<aside id="adminPanel" class="admin-panel">
+    <h2>⚙️ Admin panel</h2>
+    <p>🗑️ Recept törlés csak admin módban</p>
+</aside>
+
+<!-- FOOTER -->
+<footer class="footer">
+    © 2026 ReceptMegosztó | Nemzetközi konyhák
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

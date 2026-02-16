@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>ReceptMegosztó – Főoldal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">🍽️ ReceptMegosztó</div>
+
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+
+    <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="active">Főoldal</a></li>
+        <li><a href="recipes.html">Receptek</a></li>
+        <li><a href="recipes.html#upload">Feltöltés</a></li>
+    </ul>
+
+    <div class="nav-actions">
+        <button onclick="toggleDarkMode()">🌙</button>
+        <button onclick="toggleAdmin()">👤 Admin</button>
+    </div>
+</nav>
+
+<main class="container">
+    <section class="hero">
+        <div class="hero-text">
+            <h1 id="mainTitle">Oszd meg kedvenc receptjeidet!</h1>
+            <p>Fedezz fel új ízeket és inspirálódj mások főztjéből.</p>
+        </div>
+
+        <div class="hero-image">
+            <img src="Kepernyokep_2025-10-30_144820.png" alt="Ételek">
+        </div>
+    </section>
+</main>
+
+<!-- ADMIN PANEL -->
+<aside id="adminPanel" class="admin-panel">
+    <h2>⚙️ Admin panel (Demo)</h2>
+    <label>Főcím szöveg</label>
+    <input type="text" oninput="changeTitle(this.value)">
+    <!-- <input type="button" value="X" onclick="close(admin-panel)"> -->
+</aside>
+
+<footer class="footer" id="footerText">
+    © 2026 ReceptMegosztó | Minden jog fenntartva
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
