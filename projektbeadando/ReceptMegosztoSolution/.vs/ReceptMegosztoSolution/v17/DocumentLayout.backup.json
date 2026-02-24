@@ -1,0 +1,165 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\SULI\\Programoz\u00E1s\\vizsgaremek\\ReceptMegosztoSolution\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|c:\\suli\\programoz\u00E1s\\vizsgaremek\\receptmegosztosolution\\recepteklibrary\\data\\receptekdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|solutionrelative:recepteklibrary\\data\\receptekdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|c:\\suli\\programoz\u00E1s\\vizsgaremek\\receptmegosztosolution\\recepteklibrary\\modell\\comments.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|solutionrelative:recepteklibrary\\modell\\comments.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|c:\\suli\\programoz\u00E1s\\vizsgaremek\\receptmegosztosolution\\recepteklibrary\\modell\\ratings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|solutionrelative:recepteklibrary\\modell\\ratings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|c:\\suli\\programoz\u00E1s\\vizsgaremek\\receptmegosztosolution\\recepteklibrary\\modell\\recipe_tags.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|solutionrelative:recepteklibrary\\modell\\recipe_tags.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|c:\\suli\\programoz\u00E1s\\vizsgaremek\\receptmegosztosolution\\recepteklibrary\\modell\\recipes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|solutionrelative:recepteklibrary\\modell\\recipes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|c:\\suli\\programoz\u00E1s\\vizsgaremek\\receptmegosztosolution\\recepteklibrary\\modell\\tag_categories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|solutionrelative:recepteklibrary\\modell\\tag_categories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|c:\\suli\\programoz\u00E1s\\vizsgaremek\\receptmegosztosolution\\recepteklibrary\\modell\\user_default_tags.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|solutionrelative:recepteklibrary\\modell\\user_default_tags.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|c:\\suli\\programoz\u00E1s\\vizsgaremek\\receptmegosztosolution\\recepteklibrary\\modell\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|solutionrelative:recepteklibrary\\modell\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|c:\\suli\\programoz\u00E1s\\vizsgaremek\\receptmegosztosolution\\recepteklibrary\\modell\\tags.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|solutionrelative:recepteklibrary\\modell\\tags.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ReceptekDbContext.cs",
+              "DocumentMoniker": "C:\\SULI\\Programoz\u00E1s\\vizsgaremek\\ReceptMegosztoSolution\\ReceptekLibrary\\DATA\\ReceptekDbContext.cs",
+              "RelativeDocumentMoniker": "ReceptekLibrary\\DATA\\ReceptekDbContext.cs",
+              "ToolTip": "C:\\SULI\\Programoz\u00E1s\\vizsgaremek\\ReceptMegosztoSolution\\ReceptekLibrary\\DATA\\ReceptekDbContext.cs",
+              "RelativeToolTip": "ReceptekLibrary\\DATA\\ReceptekDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T16:29:54.787Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Comments.cs",
+              "DocumentMoniker": "C:\\SULI\\Programoz\u00E1s\\vizsgaremek\\ReceptMegosztoSolution\\ReceptekLibrary\\MODELL\\Comments.cs",
+              "RelativeDocumentMoniker": "ReceptekLibrary\\MODELL\\Comments.cs",
+              "ToolTip": "C:\\SULI\\Programoz\u00E1s\\vizsgaremek\\ReceptMegosztoSolution\\ReceptekLibrary\\MODELL\\Comments.cs",
+              "RelativeToolTip": "ReceptekLibrary\\MODELL\\Comments.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T16:29:03.817Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Ratings.cs",
+              "DocumentMoniker": "C:\\SULI\\Programoz\u00E1s\\vizsgaremek\\ReceptMegosztoSolution\\ReceptekLibrary\\MODELL\\Ratings.cs",
+              "RelativeDocumentMoniker": "ReceptekLibrary\\MODELL\\Ratings.cs",
+              "ToolTip": "C:\\SULI\\Programoz\u00E1s\\vizsgaremek\\ReceptMegosztoSolution\\ReceptekLibrary\\MODELL\\Ratings.cs",
+              "RelativeToolTip": "ReceptekLibrary\\MODELL\\Ratings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T16:26:44.523Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Recipe_Tags.cs",
+              "DocumentMoniker": "C:\\SULI\\Programoz\u00E1s\\vizsgaremek\\ReceptMegosztoSolution\\ReceptekLibrary\\MODELL\\Recipe_Tags.cs",
+              "RelativeDocumentMoniker": "ReceptekLibrary\\MODELL\\Recipe_Tags.cs",
+              "ToolTip": "C:\\SULI\\Programoz\u00E1s\\vizsgaremek\\ReceptMegosztoSolution\\ReceptekLibrary\\MODELL\\Recipe_Tags.cs",
+              "RelativeToolTip": "ReceptekLibrary\\MODELL\\Recipe_Tags.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T16:25:42.888Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Recipes.cs",
+              "DocumentMoniker": "C:\\SULI\\Programoz\u00E1s\\vizsgaremek\\ReceptMegosztoSolution\\ReceptekLibrary\\MODELL\\Recipes.cs",
+              "RelativeDocumentMoniker": "ReceptekLibrary\\MODELL\\Recipes.cs",
+              "ToolTip": "C:\\SULI\\Programoz\u00E1s\\vizsgaremek\\ReceptMegosztoSolution\\ReceptekLibrary\\MODELL\\Recipes.cs",
+              "RelativeToolTip": "ReceptekLibrary\\MODELL\\Recipes.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T16:23:03.312Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Tag_Categories.cs",
+              "DocumentMoniker": "C:\\SULI\\Programoz\u00E1s\\vizsgaremek\\ReceptMegosztoSolution\\ReceptekLibrary\\MODELL\\Tag_Categories.cs",
+              "RelativeDocumentMoniker": "ReceptekLibrary\\MODELL\\Tag_Categories.cs",
+              "ToolTip": "C:\\SULI\\Programoz\u00E1s\\vizsgaremek\\ReceptMegosztoSolution\\ReceptekLibrary\\MODELL\\Tag_Categories.cs",
+              "RelativeToolTip": "ReceptekLibrary\\MODELL\\Tag_Categories.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T16:21:52.264Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "User_Default_Tags.cs",
+              "DocumentMoniker": "C:\\SULI\\Programoz\u00E1s\\vizsgaremek\\ReceptMegosztoSolution\\ReceptekLibrary\\MODELL\\User_Default_Tags.cs",
+              "RelativeDocumentMoniker": "ReceptekLibrary\\MODELL\\User_Default_Tags.cs",
+              "ToolTip": "C:\\SULI\\Programoz\u00E1s\\vizsgaremek\\ReceptMegosztoSolution\\ReceptekLibrary\\MODELL\\User_Default_Tags.cs",
+              "RelativeToolTip": "ReceptekLibrary\\MODELL\\User_Default_Tags.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T16:18:33.491Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Tags.cs",
+              "DocumentMoniker": "C:\\SULI\\Programoz\u00E1s\\vizsgaremek\\ReceptMegosztoSolution\\ReceptekLibrary\\MODELL\\Tags.cs",
+              "RelativeDocumentMoniker": "ReceptekLibrary\\MODELL\\Tags.cs",
+              "ToolTip": "C:\\SULI\\Programoz\u00E1s\\vizsgaremek\\ReceptMegosztoSolution\\ReceptekLibrary\\MODELL\\Tags.cs",
+              "RelativeToolTip": "ReceptekLibrary\\MODELL\\Tags.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T16:16:53.777Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Users.cs",
+              "DocumentMoniker": "C:\\SULI\\Programoz\u00E1s\\vizsgaremek\\ReceptMegosztoSolution\\ReceptekLibrary\\MODELL\\Users.cs",
+              "RelativeDocumentMoniker": "ReceptekLibrary\\MODELL\\Users.cs",
+              "ToolTip": "C:\\SULI\\Programoz\u00E1s\\vizsgaremek\\ReceptMegosztoSolution\\ReceptekLibrary\\MODELL\\Users.cs",
+              "RelativeToolTip": "ReceptekLibrary\\MODELL\\Users.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T16:15:22.542Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
