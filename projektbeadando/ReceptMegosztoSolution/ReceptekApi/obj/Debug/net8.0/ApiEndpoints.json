@@ -1,0 +1,12 @@
+[
+  {
+    "ContainingType": "ReceptekApi.Controllers.PingController",
+    "Method": "Ping",
+    "RelativePath": "api/Ping",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

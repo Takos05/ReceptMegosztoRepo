@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "I15DTjDcrq0=",
+  "dgSpecHash": "4/K9F/IGDLw=",
   "success": true,
-  "projectFilePath": "C:\\Users\\akos\\Source\\Repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\ReceptekLibrary.csproj",
+  "projectFilePath": "C:\\Users\\akos\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\ReceptekLibrary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\akos\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\akos\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

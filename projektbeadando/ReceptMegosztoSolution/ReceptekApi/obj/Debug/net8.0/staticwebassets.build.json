@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "7iS5cH2kTBt83yDALGzATQCuFqQwuQF3rzUKjrZzyDM=",
+  "Source": "ReceptekApi",
+  "BasePath": "_content/ReceptekApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
