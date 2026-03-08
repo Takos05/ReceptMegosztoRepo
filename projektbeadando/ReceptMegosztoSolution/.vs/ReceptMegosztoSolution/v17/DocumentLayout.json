@@ -3,6 +3,26 @@
   "WorkspaceRootPath": "C:\\Users\\akos\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{4134ED95-0F43-410A-AA6F-6D3410325F29}|ReceptekApi\\ReceptekApi.csproj|c:\\users\\akos\\source\\repos\\receptmegosztorepo\\projektbeadando\\receptmegosztosolution\\receptekapi\\controllers\\recipecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4134ED95-0F43-410A-AA6F-6D3410325F29}|ReceptekApi\\ReceptekApi.csproj|solutionrelative:receptekapi\\controllers\\recipecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4134ED95-0F43-410A-AA6F-6D3410325F29}|ReceptekApi\\ReceptekApi.csproj|c:\\users\\akos\\source\\repos\\receptmegosztorepo\\projektbeadando\\receptmegosztosolution\\receptekapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4134ED95-0F43-410A-AA6F-6D3410325F29}|ReceptekApi\\ReceptekApi.csproj|solutionrelative:receptekapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|c:\\users\\akos\\source\\repos\\receptmegosztorepo\\projektbeadando\\receptmegosztosolution\\recepteklibrary\\data\\receptekdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|solutionrelative:recepteklibrary\\data\\receptekdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|c:\\users\\akos\\source\\repos\\receptmegosztorepo\\projektbeadando\\receptmegosztosolution\\recepteklibrary\\modell\\tag_categories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|solutionrelative:recepteklibrary\\modell\\tag_categories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|c:\\users\\akos\\source\\repos\\receptmegosztorepo\\projektbeadando\\receptmegosztosolution\\recepteklibrary\\modell\\recipes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|solutionrelative:recepteklibrary\\modell\\recipes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4134ED95-0F43-410A-AA6F-6D3410325F29}|ReceptekApi\\ReceptekApi.csproj|c:\\users\\akos\\source\\repos\\receptmegosztorepo\\projektbeadando\\receptmegosztosolution\\receptekapi\\controllers\\pingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4134ED95-0F43-410A-AA6F-6D3410325F29}|ReceptekApi\\ReceptekApi.csproj|solutionrelative:receptekapi\\controllers\\pingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -11,16 +31,8 @@
       "RelativeMoniker": "D:0:0:{4134ED95-0F43-410A-AA6F-6D3410325F29}|ReceptekApi\\ReceptekApi.csproj|solutionrelative:receptekapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4134ED95-0F43-410A-AA6F-6D3410325F29}|ReceptekApi\\ReceptekApi.csproj|c:\\users\\akos\\source\\repos\\receptmegosztorepo\\projektbeadando\\receptmegosztosolution\\receptekapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4134ED95-0F43-410A-AA6F-6D3410325F29}|ReceptekApi\\ReceptekApi.csproj|solutionrelative:receptekapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|c:\\users\\akos\\source\\repos\\receptmegosztorepo\\projektbeadando\\receptmegosztosolution\\recepteklibrary\\modell\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|solutionrelative:recepteklibrary\\modell\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|c:\\users\\akos\\source\\repos\\receptmegosztorepo\\projektbeadando\\receptmegosztosolution\\recepteklibrary\\data\\receptekdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|solutionrelative:recepteklibrary\\data\\receptekdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|c:\\users\\akos\\source\\repos\\receptmegosztorepo\\projektbeadando\\receptmegosztosolution\\recepteklibrary\\modell\\comments.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -33,14 +45,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|c:\\users\\akos\\source\\repos\\receptmegosztorepo\\projektbeadando\\receptmegosztosolution\\recepteklibrary\\modell\\recipe_tags.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|solutionrelative:recepteklibrary\\modell\\recipe_tags.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|c:\\users\\akos\\source\\repos\\receptmegosztorepo\\projektbeadando\\receptmegosztosolution\\recepteklibrary\\modell\\recipes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|solutionrelative:recepteklibrary\\modell\\recipes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|c:\\users\\akos\\source\\repos\\receptmegosztorepo\\projektbeadando\\receptmegosztosolution\\recepteklibrary\\modell\\tag_categories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|solutionrelative:recepteklibrary\\modell\\tag_categories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DC96A9C2-DE35-43EC-9418-A2CEB25DC8E0}|ReceptekLibrary\\ReceptekLibrary.csproj|c:\\users\\akos\\source\\repos\\receptmegosztorepo\\projektbeadando\\receptmegosztosolution\\recepteklibrary\\modell\\user_default_tags.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -63,6 +67,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "RecipeController.cs",
+              "DocumentMoniker": "C:\\Users\\akos\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekApi\\Controllers\\RecipeController.cs",
+              "RelativeDocumentMoniker": "ReceptekApi\\Controllers\\RecipeController.cs",
+              "ToolTip": "C:\\Users\\akos\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekApi\\Controllers\\RecipeController.cs",
+              "RelativeToolTip": "ReceptekApi\\Controllers\\RecipeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T14:49:18.283Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "PingController.cs",
               "DocumentMoniker": "C:\\Users\\akos\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekApi\\Controllers\\PingController.cs",
               "RelativeDocumentMoniker": "ReceptekApi\\Controllers\\PingController.cs",
@@ -75,20 +92,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\akos\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekApi\\Program.cs",
               "RelativeDocumentMoniker": "ReceptekApi\\Program.cs",
               "ToolTip": "C:\\Users\\akos\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekApi\\Program.cs",
               "RelativeToolTip": "ReceptekApi\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAIwCUAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-04T17:50:49.25Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\akos\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekApi\\appsettings.json",
               "RelativeDocumentMoniker": "ReceptekApi\\appsettings.json",
@@ -101,19 +118,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "ReceptekDbContext.cs",
               "DocumentMoniker": "C:\\Users\\akos\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\DATA\\ReceptekDbContext.cs",
               "RelativeDocumentMoniker": "ReceptekLibrary\\DATA\\ReceptekDbContext.cs",
               "ToolTip": "C:\\Users\\akos\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\DATA\\ReceptekDbContext.cs",
               "RelativeToolTip": "ReceptekLibrary\\DATA\\ReceptekDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-24T16:29:54.787Z"
+              "WhenOpened": "2026-02-24T16:29:54.787Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "Comments.cs",
               "DocumentMoniker": "C:\\Users\\akos\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\MODELL\\Comments.cs",
               "RelativeDocumentMoniker": "ReceptekLibrary\\MODELL\\Comments.cs",
@@ -125,7 +143,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "Ratings.cs",
               "DocumentMoniker": "C:\\Users\\akos\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\MODELL\\Ratings.cs",
               "RelativeDocumentMoniker": "ReceptekLibrary\\MODELL\\Ratings.cs",
@@ -137,7 +155,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "Recipe_Tags.cs",
               "DocumentMoniker": "C:\\Users\\akos\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\MODELL\\Recipe_Tags.cs",
               "RelativeDocumentMoniker": "ReceptekLibrary\\MODELL\\Recipe_Tags.cs",
@@ -149,19 +167,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 4,
               "Title": "Recipes.cs",
               "DocumentMoniker": "C:\\Users\\akos\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\MODELL\\Recipes.cs",
               "RelativeDocumentMoniker": "ReceptekLibrary\\MODELL\\Recipes.cs",
               "ToolTip": "C:\\Users\\akos\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\MODELL\\Recipes.cs",
               "RelativeToolTip": "ReceptekLibrary\\MODELL\\Recipes.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-24T16:23:03.312Z"
+              "WhenOpened": "2026-02-24T16:23:03.312Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 3,
               "Title": "Tag_Categories.cs",
               "DocumentMoniker": "C:\\Users\\akos\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\MODELL\\Tag_Categories.cs",
               "RelativeDocumentMoniker": "ReceptekLibrary\\MODELL\\Tag_Categories.cs",
@@ -169,11 +188,12 @@
               "RelativeToolTip": "ReceptekLibrary\\MODELL\\Tag_Categories.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-24T16:21:52.264Z"
+              "WhenOpened": "2026-02-24T16:21:52.264Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "User_Default_Tags.cs",
               "DocumentMoniker": "C:\\Users\\akos\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\MODELL\\User_Default_Tags.cs",
               "RelativeDocumentMoniker": "ReceptekLibrary\\MODELL\\User_Default_Tags.cs",
@@ -185,7 +205,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "Tags.cs",
               "DocumentMoniker": "C:\\Users\\akos\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\MODELL\\Tags.cs",
               "RelativeDocumentMoniker": "ReceptekLibrary\\MODELL\\Tags.cs",
@@ -197,7 +217,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "Users.cs",
               "DocumentMoniker": "C:\\Users\\akos\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\MODELL\\Users.cs",
               "RelativeDocumentMoniker": "ReceptekLibrary\\MODELL\\Users.cs",
