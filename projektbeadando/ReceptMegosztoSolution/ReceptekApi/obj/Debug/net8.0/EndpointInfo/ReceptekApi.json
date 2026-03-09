@@ -5,10 +5,63 @@
     "version": "1.0"
   },
   "paths": {
+    "/api/Comment": {
+      "post": {
+        "tags": [
+          "Comment"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Comments"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Comments"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Comments"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Ping": {
       "get": {
         "tags": [
           "Ping"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Rating/averageByRecipe": {
+      "get": {
+        "tags": [
+          "Rating"
+        ],
+        "parameters": [
+          {
+            "name": "recipeId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -175,10 +228,70 @@
           }
         }
       }
+    },
+    "/api/Tags/UserDefaults": {
+      "get": {
+        "tags": [
+          "Tags"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/User": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "Comments": {
+        "type": "object",
+        "properties": {
+          "comment_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "user_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "recipe_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "comment_text": {
+            "type": "string",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
       "Recipes": {
         "type": "object",
         "properties": {

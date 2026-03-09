@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "ReceptekApi.Controllers.CommentController",
+    "Method": "CreateComment",
+    "RelativePath": "api/Comment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "comment",
+        "Type": "ReceptekLibrary.MODELL.Comments",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ReceptekApi.Controllers.PingController",
     "Method": "Ping",
     "RelativePath": "api/Ping",
@@ -7,6 +23,22 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ReceptekApi.Controllers.RatingController",
+    "Method": "GetAverageRatingByRecipe",
+    "RelativePath": "api/Rating/averageByRecipe",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "recipeId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -108,6 +140,32 @@
     "ContainingType": "ReceptekApi.Controllers.TagsController",
     "Method": "GetTagsByCategories",
     "RelativePath": "api/Tags/byCategories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ReceptekApi.Controllers.TagsController",
+    "Method": "GetUserDefaultTags",
+    "RelativePath": "api/Tags/UserDefaults",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ReceptekApi.Controllers.UserController",
+    "Method": "GetUsers",
+    "RelativePath": "api/User",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

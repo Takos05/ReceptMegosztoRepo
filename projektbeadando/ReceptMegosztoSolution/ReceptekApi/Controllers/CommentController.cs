@@ -23,5 +23,18 @@ namespace ReceptekApi.Controllers
             await _context.SaveChangesAsync();
             return Ok();
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteComment(int commentId)
+        {
+            var comment = await _context.comments.FindAsync(commentId);
+            if (comment == null)
+            {
+                return NotFound();
+            }
+            _context.comments.Remove(comment);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace ReceptekLibrary.MODELL
         public int rating_id { get; set; }
         public int user_id { get; set; }
         public int recipe_id { get; set; }
-        public int ratings_value { get; set; }
+        public double ratings_value { get; set; }
         public DateTime created_at { get; set; }
     }
 }
