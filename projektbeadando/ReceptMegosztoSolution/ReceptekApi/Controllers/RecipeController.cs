@@ -79,5 +79,12 @@ namespace ReceptekApi.Controllers
             await _context.SaveChangesAsync();
             return Ok(recipe);
         }
+
+        [HttpGet("comments")]
+        public async Task<IActionResult> GetCommentsForRecipe(int recipeId)
+        {
+            var comments = await _context.comments.Where(c => c.recipe_id == recipeId).ToListAsync();
+            return Ok(comments);
+        }
     }
 }
