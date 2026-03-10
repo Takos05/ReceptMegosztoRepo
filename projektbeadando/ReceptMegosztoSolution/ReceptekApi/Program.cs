@@ -37,7 +37,18 @@ builder.Services.AddDbContext<ReceptekDbContext>(options =>
 //        };
 // });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowBlazor",
+        policy => policy
+            .WithOrigins("https://localhost:7000")
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
+
 var app = builder.Build();
+
+app.UseCors("AllowBlazor");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

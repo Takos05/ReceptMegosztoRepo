@@ -1,0 +1,22 @@
+﻿@page "/receptek"
+@inject HttpClient Http
+@using ReceptekLibrary.MODELL
+
+<h3>Receptek</h3>
+
+@if (receptek != null)
+{
+    @foreach (var recept in receptek)
+    {
+        <div class="card mb-3">
+            <p>@recept.title</p>
+        </div>
+    }
+   }
+
+@code{
+    List<Recipes> receptek = new();
+    protected override async Task OnInitializedAsync(){
+        receptek = await Http.GetFromJsonAsync<List<Recipes>>("/api/Recipe");
+    }
+}

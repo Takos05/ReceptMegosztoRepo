@@ -1,0 +1,182 @@
+:root {
+    --bg: #f7f7f7;
+    --text: #333;
+    --primary: #2c3e50;
+    --card: white;
+}
+
+body.dark {
+    --bg: #121212;
+    --text: #f1f1f1;
+    --primary: #1e1e1e;
+    --card: #1f1f1f;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+      font-family: 
+        "Segoe UI Emoji",
+        "Apple Color Emoji",
+        "Noto Color Emoji",
+        Arial,
+        sans-serif;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background-color: var(--primary);
+    color: white;
+    position: sticky;
+    top: 0;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+}
+
+.nav-links a.active,
+.nav-links a:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+
+.hamburger {
+    display: none;
+    font-size: 26px;
+}
+
+/* CONTENT */
+.container {
+    width: 90%;
+    margin: auto;
+    padding: 40px 0;
+}
+
+/* HERO */
+.hero {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.hero-image img {
+    width: 450px;
+    border-radius: 10px;
+}
+
+/* RECIPES */
+.recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.recipe-card {
+    background-color: var(--card);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* ADMIN */
+.admin-panel {
+    position: fixed;
+    right: -300px;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    background-color: var(--card);
+    padding: 20px;
+    transition: 0.3s;
+}
+
+.admin-panel.active {
+    right: 0;
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    margin-top: 300px;
+    padding: 20px;
+    background-color: var(--primary);
+    color: white;
+}
+
+/* MOBIL */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+        cursor: pointer;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 65px;
+        left: 0;
+        width: 100%;
+        background-color: var(--primary);
+        flex-direction: column;
+        display: none;
+        padding: 20px;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .hero {
+        flex-direction: column;
+    }
+
+    .hero-image img {
+        width: 100%;
+    }
+}
+.upload-form {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.upload-form input,
+.upload-form textarea {
+    padding: 8px;
+}
+
+.recipe-card button {
+    margin-right: 5px;
+    padding: 4px 8px;
+    cursor: pointer;
+}
+
+select {
+    margin: 10px 0;
+    padding: 6px;
+}
+
+
+
+

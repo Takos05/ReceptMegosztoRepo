@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceptekLibrary", "Receptek
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceptekApi", "ReceptekApi\ReceptekApi.csproj", "{4134ED95-0F43-410A-AA6F-6D3410325F29}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Receptek.Front", "Receptek.Front\Receptek.Front.csproj", "{07242013-38B8-47D3-8500-82EBC845A8B2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4134ED95-0F43-410A-AA6F-6D3410325F29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4134ED95-0F43-410A-AA6F-6D3410325F29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4134ED95-0F43-410A-AA6F-6D3410325F29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07242013-38B8-47D3-8500-82EBC845A8B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07242013-38B8-47D3-8500-82EBC845A8B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07242013-38B8-47D3-8500-82EBC845A8B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07242013-38B8-47D3-8500-82EBC845A8B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
