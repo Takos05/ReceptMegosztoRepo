@@ -1,0 +1,31 @@
+﻿@page "/register"
+@inject HttpClient Http
+
+<h3>Regisztráció</h3>
+
+<input @bind="username" placeholder="Felhasználónév" />
+<input @bind="password" type="password" placeholder="Jelszó" />
+
+<button @onclick="RegisterUser">Register</button>
+
+<p>@message</p>
+
+@code {
+    string username;
+    string password;
+    string message;
+
+    async Task RegisterUser()
+    {
+        var response = await Http.PostAsJsonAsync("api/auth/register", new
+        {
+            Username = username,
+            PasswordHash = password
+        });
+
+        if (response.IsSuccessStatusCode)
+            message = "Sikeres regisztráció!";
+        else
+            message = "Hiba történt";
+    }
+}

@@ -1,0 +1,31 @@
+﻿@page "/login"
+@inject HttpClient Http
+
+<h3>Bejelentkezés</h3>
+
+<input @bind="username" placeholder="Felhasználónév" />
+<input @bind="password" type="password" placeholder="Jelszó" />
+
+<button @onclick="LoginUser">Login</button>
+
+<p>@message</p>
+
+@code {
+    string username;
+    string password;
+    string message;
+
+    async Task LoginUser()
+    {
+        var response = await Http.PostAsJsonAsync("api/auth/login", new
+        {
+            username = username,
+            password = password
+        });
+
+        if (response.IsSuccessStatusCode)
+            message = "Sikeres login!";
+        else
+            message = "Hibás adatok";
+    }
+}
