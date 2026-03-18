@@ -37,6 +37,22 @@ namespace ReceptekApi.Controllers
             return Ok(result);
         }
 
+        [HttpGet("byRecipe/{recipeId}")]
+        public IActionResult GetTagsByRecipe(int recipeId)
+        {
+            var tagIds = _context.recipe_Tags.Where(t => t.recipe_id == recipeId).ToList();
+            var tags = new List<Tags>();
+            foreach (var tagId in tagIds)
+            {
+                var tag = _context.tags.FirstOrDefault(t => t.tag_id == tagId.tag_id);
+                if (tag != null)
+                {
+                    tags.Add(tag);
+                }
+            }
+            return Ok(tags);
+        }
+
         [HttpGet("UserDefaults")]
         public IActionResult GetUserDefaultTags(int userId)
         {

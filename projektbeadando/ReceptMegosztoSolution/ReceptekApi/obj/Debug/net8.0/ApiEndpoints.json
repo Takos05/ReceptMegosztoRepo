@@ -228,6 +228,22 @@
   },
   {
     "ContainingType": "ReceptekApi.Controllers.TagsController",
+    "Method": "GetTagsByRecipe",
+    "RelativePath": "api/Tags/byRecipe/{recipeId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "recipeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ReceptekApi.Controllers.TagsController",
     "Method": "GetUserDefaultTags",
     "RelativePath": "api/Tags/UserDefaults",
     "HttpMethod": "GET",

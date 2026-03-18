@@ -1,0 +1,120 @@
+﻿@page "/menu"
+@using ReceptekLibrary.MODELL
+@inject HttpClient httpClient
+@rendermode InteractiveServer
+
+<div class="menuBody">
+    <div class="tagekSidebar">
+        @foreach(var category in tagek){
+            <h5>@category.Key</h5>
+            foreach (var tag in category.Value)
+            {
+                <input type="checkbox"
+                id="@tag"
+                checked="@selectedTags.Contains(tag)"
+                @onchange="(ChangeEventArgs e) => ToggleTag(tag, (bool)e.Value)">
+                <label for="@tag">@tag</label>
+                <br>
+            }
+        }
+    </div>
+    <button type="button" @onclick="menuCreate">Menü készítése</button>
+    <div class="menuTableDiv">
+        <table class="menuTable">
+            <thead>
+                <tr>
+                    @foreach (var nap in hetNapjai)
+                    {
+                        <th>@nap</th>
+                    }
+                </tr>
+            </thead>
+            @if (isMenuCreated && menu.Count == hetNapjai.Length)
+            {
+                <tbody>
+                    <tr>
+                        @for (int i = 0; i < hetNapjai.Length; i++)
+                        {
+                            <td>@menu[i]?.title</td>
+                        }
+                    </tr>
+                </tbody>
+            }
+
+        </table>
+    </div>
+</div>
+
+@code {
+
+    bool isMenuCreated = false;
+    string[] hetNapjai = new string[] { "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombat", "Vasárnap" };
+
+    Dictionary<string, string[]> tagek = new Dictionary<string, string[]>();
+    List<Recipes> receptek = new();
+    protected override async Task OnInitializedAsync()
+    {
+        receptek = await httpClient.GetFromJsonAsync<List<Recipes>>("/api/Recipe");
+        tagek = await httpClient.GetFromJsonAsync<Dictionary<string, string[]>>("api/Tags/byCategories");
+    }
+
+    // Tagek kiválasztása
+    List<string> selectedTags = new List<string>();
+    void ToggleTag(string tag, bool isChecked)
+    {
+        if (isChecked)
+            selectedTags.Add(tag);
+        else
+            selectedTags.Remove(tag);
+    }
+
+    // Menü készítése
+    List<Recipes> menu = new List<Recipes>();
+
+    async Task menuCreate()
+    {
+        Console.WriteLine("CLICKED!");
+        menu.Clear();
+
+        var filteredRecipes = await FilterRecipesByTags();
+
+
+        if (filteredRecipes.Count < hetNapjai.Length)
+        {
+            isMenuCreated = false;
+            return;
+        }
+
+
+        var rnd = new Random();
+
+        foreach (var nap in hetNapjai)
+        {
+            var selectedRecipe = filteredRecipes[rnd.Next(filteredRecipes.Count)];
+            menu.Add(selectedRecipe);
+            filteredRecipes.Remove(selectedRecipe);
+        }
+
+        isMenuCreated = true;
+    }
+
+    private async Task<List<Recipes>> FilterRecipesByTags()
+    {
+        var filteredRecipes = new List<Recipes>();
+        foreach (var recipe in receptek)
+        {
+            var tags = await httpClient.GetFromJsonAsync<List<Tags>>(
+                $"api/Tags/byRecipe/{recipe.recipe_id}"
+            );
+
+            var tagNames = tags.Select(t => t.tag_name).ToList();
+
+            if (selectedTags.Any(tag => tagNames.Contains(tag)))
+            {
+                filteredRecipes.Add(recipe);
+            }
+        }
+        return filteredRecipes;
+    }
+
+}

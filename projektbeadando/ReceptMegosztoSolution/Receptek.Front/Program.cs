@@ -11,6 +11,9 @@ builder.Services.AddScoped( sp => new HttpClient
     BaseAddress = new Uri("https://localhost:44319/")
 });
 
+builder.Services.AddRazorComponents()
+    .AddInteractiveServerComponents();
+
 var app = builder.Build();
  
 // Configure the HTTP request pipeline.
