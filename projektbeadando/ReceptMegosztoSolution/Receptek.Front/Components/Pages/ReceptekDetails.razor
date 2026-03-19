@@ -1,0 +1,68 @@
+﻿@page "/receptek/{id:int}"
+@inject HttpClient Http
+@using ReceptekLibrary.MODELL
+@rendermode InteractiveServer
+
+<h3>Recept részletei</h3>
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+else if (recipe == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">@recipe.title</h4>
+            @if (!string.IsNullOrEmpty(recipe.image_url))
+            {
+                <img src="@recipe.image_url" alt="@recipe.title" class="img-fluid mb-3" />
+            }
+            <p>@recipe.description</p>
+            <ul>
+                <li>Előkészítés: @recipe.prep_time_min min</li>
+                <li>Sütés/főzés: @recipe.cook_time_min min</li>
+                <li>Adagok: @recipe.servings</li>
+                <li>Létrehozva: @recipe.created_at.ToString("yyyy-MM-dd")</li>
+            </ul>
+            <a class="btn btn-secondary" href="/receptek">Vissza a listához</a>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+
+    Recipes? recipe;
+    string? errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var response = await Http.GetAsync($"/api/Recipe/Recipes/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                recipe = await response.Content.ReadFromJsonAsync<Recipes>();
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                errorMessage = "Recipe not found.";
+            }
+            else
+            {
+                var body = await response.Content.ReadAsStringAsync();
+                errorMessage = $"API error {(int)response.StatusCode} {response.ReasonPhrase}: {body}";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Request failed: {ex.Message}";
+        }
+    }
+}

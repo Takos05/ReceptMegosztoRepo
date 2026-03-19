@@ -2,22 +2,110 @@
 @inject HttpClient Http
 @rendermode InteractiveServer
 @using ReceptekLibrary.MODELL
+@using System.Net.Http.Json
+@using System.Linq
 
 <h3>Receptek</h3>
 
-@if (receptek != null)
+
+
+@if (!string.IsNullOrEmpty(errorMessage))
 {
-    @foreach (var recept in receptek)
+    <div class="alert alert-danger">@errorMessage</div>
+}
+else if (serverRecipes?.Count > 0)
+{
+    @foreach (var recept in serverRecipes)
     {
         <div class="card mb-3">
-            <p>@recept.title</p>
+            <a href="@($"/receptek/{recept.recipe_id}")" class="text-decoration-none text-dark">
+                <div class="card-body">
+                    <h5 class="card-title">@recept.title</h5>
+                    @if (!string.IsNullOrEmpty(recept.image_url))
+                    {
+                        <img src="@recept.image_url" alt="@recept.title" class="img-fluid mb-2" />
+                    }
+                    <p class="card-text">@recept.description</p>
+                </div>
+            </a>
         </div>
     }
-   }
+}
+else
+{
+    <p>No recipes found.</p>
+}
 
-@code{
-    List<Recipes> receptek = new();
-    protected override async Task OnInitializedAsync(){
-        receptek = await Http.GetFromJsonAsync<List<Recipes>>("/api/Recipe");
+@code {
+    // Local UI model to avoid name collisions with server-side model types
+    List<Recipe> recipes = new();
+    List<Recipe> FilteredRecipes = new();
+    List<string> Countries = new();
+    Recipe newRecipe = new();
+
+    // Server-side model list (from ReceptekLibrary.MODELL.Recipes)
+    List<Recipes> serverRecipes = new();
+    string? errorMessage;
+
+    protected override void OnInitialized()
+    {
+        // Ensure filtered view and country list are initialized from the local list
+        FilteredRecipes = recipes.ToList();
+        Countries = recipes.Select(r => r.Country).Distinct().Where(s => !string.IsNullOrEmpty(s)).ToList();
+    }
+
+    void FilterChanged(ChangeEventArgs e)
+    {
+        var value = e.Value?.ToString();
+
+        if (value == "all")
+            FilteredRecipes = recipes.ToList();
+        else
+            FilteredRecipes = recipes.Where(r => r.Country == value).ToList();
+    }
+
+    void AddRecipe()
+    {
+        recipes.Add(new Recipe
+        {
+            Name = newRecipe.Name,
+            Desc = newRecipe.Desc,
+            Time = newRecipe.Time,
+            Country = newRecipe.Country
+        });
+
+        newRecipe = new Recipe();
+
+        Countries = recipes.Select(r => r.Country).Distinct().Where(s => !string.IsNullOrEmpty(s)).ToList();
+        FilteredRecipes = recipes.ToList();
+    }
+
+    class Recipe
+    {
+        public string Name { get; set; }
+        public string Desc { get; set; }
+        public string Time { get; set; }
+        public string Country { get; set; }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var response = await Http.GetAsync("/api/Recipe");
+            if (response.IsSuccessStatusCode)
+            {
+                serverRecipes = await response.Content.ReadFromJsonAsync<List<Recipes>>() ?? new List<Recipes>();
+            }
+            else
+            {
+                var body = await response.Content.ReadAsStringAsync();
+                errorMessage = $"API error {(int)response.StatusCode} {response.ReasonPhrase}: {body}";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Request failed: {ex.Message}";
+        }
     }
 }
