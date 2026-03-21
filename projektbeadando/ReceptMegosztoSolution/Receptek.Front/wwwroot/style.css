@@ -16,18 +16,12 @@ body.dark {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
 }
 
 body {
     background-color: var(--bg);
     color: var(--text);
-      font-family: 
-        "Segoe UI Emoji",
-        "Apple Color Emoji",
-        "Noto Color Emoji",
-        Arial,
-        sans-serif;
+    font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", Arial, sans-serif;
 }
 
 /* NAVBAR */
@@ -48,17 +42,17 @@ body {
     gap: 20px;
 }
 
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    padding: 6px 12px;
-    border-radius: 5px;
-}
+    .nav-links a {
+        color: white;
+        text-decoration: none;
+        padding: 6px 12px;
+        border-radius: 5px;
+    }
 
-.nav-links a.active,
-.nav-links a:hover {
-    background-color: rgba(255,255,255,0.2);
-}
+        .nav-links a.active,
+        .nav-links a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
 
 .hamburger {
     display: none;
@@ -111,9 +105,9 @@ body {
     transition: 0.3s;
 }
 
-.admin-panel.active {
-    right: 0;
-}
+    .admin-panel.active {
+        right: 0;
+    }
 
 /* FOOTER */
 .footer {
@@ -142,9 +136,9 @@ body {
         padding: 20px;
     }
 
-    .nav-links.show {
-        display: flex;
-    }
+        .nav-links.show {
+            display: flex;
+        }
 
     .hero {
         flex-direction: column;
@@ -154,6 +148,7 @@ body {
         width: 100%;
     }
 }
+
 .upload-form {
     max-width: 400px;
     display: flex;
@@ -161,10 +156,10 @@ body {
     gap: 10px;
 }
 
-.upload-form input,
-.upload-form textarea {
-    padding: 8px;
-}
+    .upload-form input,
+    .upload-form textarea {
+        padding: 8px;
+    }
 
 .recipe-card button {
     margin-right: 5px;
@@ -177,6 +172,138 @@ select {
     padding: 6px;
 }
 
+/* MENU */
+.menuBody {
+    display: flex;
+    gap: 24px;
+    padding: 20px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    background-color: #f5f7fa;
+}
 
+.tagekSidebar {
+    width: 260px;
+    flex-shrink: 0;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+}
 
+    .tagekSidebar h5 {
+        margin-top: 15px;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #333;
+    }
 
+    .tagekSidebar label {
+        margin-left: 6px;
+        cursor: pointer;
+    }
+
+.menuButton {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #6c757d;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+    .menuButton:hover {
+        background: #5a6268;
+    }
+
+.container {
+    padding-top: 0 !important;
+}
+
+.menuTable {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 12px;
+}
+
+.menuTableDiv {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.menuTable thead th {
+    height: 60px;
+    max-height: 60px;
+    vertical-align: middle;
+    text-align: center;
+    padding: 12px;
+    background: #ffffff;
+    border-radius: 10px;
+    font-weight: 600;
+    color: #444;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.menuTable td {
+    vertical-align: top;
+}
+
+.card {
+    height: 100%;
+    border: none;
+    border-radius: 14px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    transition: 0.25s ease;
+}
+
+    .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+    }
+
+.card-body {
+    padding: 15px;
+}
+
+.card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+@media (max-width: 900px) {
+    .menuBody {
+        flex-direction: column;
+    }
+
+    .tagekSidebar {
+        width: 100%;
+        max-height: none;
+    }
+
+    .menuTable {
+        border-spacing: 8px;
+    }
+}

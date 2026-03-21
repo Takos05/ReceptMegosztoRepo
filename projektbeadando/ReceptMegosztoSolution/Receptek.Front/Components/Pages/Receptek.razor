@@ -37,19 +37,16 @@ else
 }
 
 @code {
-    // Local UI model to avoid name collisions with server-side model types
     List<Recipe> recipes = new();
     List<Recipe> FilteredRecipes = new();
     List<string> Countries = new();
     Recipe newRecipe = new();
 
-    // Server-side model list (from ReceptekLibrary.MODELL.Recipes)
     List<Recipes> serverRecipes = new();
     string? errorMessage;
 
     protected override void OnInitialized()
     {
-        // Ensure filtered view and country list are initialized from the local list
         FilteredRecipes = recipes.ToList();
         Countries = recipes.Select(r => r.Country).Distinct().Where(s => !string.IsNullOrEmpty(s)).ToList();
     }

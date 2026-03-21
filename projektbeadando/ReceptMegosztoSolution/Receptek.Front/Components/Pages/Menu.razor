@@ -5,6 +5,7 @@
 
 <div class="menuBody">
     <div class="tagekSidebar">
+
         @foreach(var category in tagek){
             <h5>@category.Key</h5>
             foreach (var tag in category.Value)
@@ -17,8 +18,10 @@
                 <br>
             }
         }
+
+        <button type="button" @onclick="menuCreate" class="menuButton">Menü készítése</button>
     </div>
-    <button type="button" @onclick="menuCreate">Menü készítése</button>
+
     <div class="menuTableDiv">
         <table class="menuTable">
             <thead>
@@ -35,7 +38,20 @@
                     <tr>
                         @for (int i = 0; i < hetNapjai.Length; i++)
                         {
-                            <td>@menu[i]?.title</td>
+                            <td>
+                                <div class="card mb-3">
+                                    <a href="@($"/receptek/{menu[i].recipe_id}")" class="text-decoration-none text-dark">
+                                        <div class="card-body">
+                                            <h5 class="card-title">@menu[i].title</h5>
+                                            @if (!string.IsNullOrEmpty(menu[i].image_url))
+                                            {
+                                                <img src="@menu[i].image_url" alt="@menu[i].title" class="img-fluid mb-2" />
+                                            }
+                                            <p class="card-text">@menu[i].description</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </td>
                         }
                     </tr>
                 </tbody>
@@ -76,23 +92,31 @@
         Console.WriteLine("CLICKED!");
         menu.Clear();
 
-        var filteredRecipes = await FilterRecipesByTags();
+        List<Recipes> usableRecipes;
 
+        // ✅ If no tags selected → use all recipes
+        if (selectedTags.Count == 0)
+        {
+            usableRecipes = new List<Recipes>(receptek);
+        }
+        else
+        {
+            usableRecipes = await FilterRecipesByTags();
+        }
 
-        if (filteredRecipes.Count < hetNapjai.Length)
+        if (usableRecipes.Count < hetNapjai.Length)
         {
             isMenuCreated = false;
             return;
         }
 
-
         var rnd = new Random();
 
         foreach (var nap in hetNapjai)
         {
-            var selectedRecipe = filteredRecipes[rnd.Next(filteredRecipes.Count)];
+            var selectedRecipe = usableRecipes[rnd.Next(usableRecipes.Count)];
             menu.Add(selectedRecipe);
-            filteredRecipes.Remove(selectedRecipe);
+            usableRecipes.Remove(selectedRecipe);
         }
 
         isMenuCreated = true;
