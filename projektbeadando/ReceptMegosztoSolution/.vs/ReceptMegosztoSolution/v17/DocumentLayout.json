@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\soosnm0901\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{07242013-38B8-47D3-8500-82EBC845A8B2}|Receptek.Front\\Receptek.Front.csproj|c:\\users\\soosnm0901\\source\\repos\\receptmegosztorepo\\projektbeadando\\receptmegosztosolution\\receptek.front\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{07242013-38B8-47D3-8500-82EBC845A8B2}|Receptek.Front\\Receptek.Front.csproj|solutionrelative:receptek.front\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{07242013-38B8-47D3-8500-82EBC845A8B2}|Receptek.Front\\Receptek.Front.csproj|c:\\users\\soosnm0901\\source\\repos\\receptmegosztorepo\\projektbeadando\\receptmegosztosolution\\receptek.front\\components\\pages\\register.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{07242013-38B8-47D3-8500-82EBC845A8B2}|Receptek.Front\\Receptek.Front.csproj|solutionrelative:receptek.front\\components\\pages\\register.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{07242013-38B8-47D3-8500-82EBC845A8B2}|Receptek.Front\\Receptek.Front.csproj|c:\\users\\soosnm0901\\source\\repos\\receptmegosztorepo\\projektbeadando\\receptmegosztosolution\\receptek.front\\components\\pages\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{07242013-38B8-47D3-8500-82EBC845A8B2}|Receptek.Front\\Receptek.Front.csproj|solutionrelative:receptek.front\\components\\pages\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{07242013-38B8-47D3-8500-82EBC845A8B2}|Receptek.Front\\Receptek.Front.csproj|c:\\users\\soosnm0901\\source\\repos\\receptmegosztorepo\\projektbeadando\\receptmegosztosolution\\receptek.front\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{07242013-38B8-47D3-8500-82EBC845A8B2}|Receptek.Front\\Receptek.Front.csproj|solutionrelative:receptek.front\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{07242013-38B8-47D3-8500-82EBC845A8B2}|Receptek.Front\\Receptek.Front.csproj|c:\\users\\soosnm0901\\source\\repos\\receptmegosztorepo\\projektbeadando\\receptmegosztosolution\\receptek.front\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{07242013-38B8-47D3-8500-82EBC845A8B2}|Receptek.Front\\Receptek.Front.csproj|solutionrelative:receptek.front\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{07242013-38B8-47D3-8500-82EBC845A8B2}|Receptek.Front\\Receptek.Front.csproj|c:\\users\\soosnm0901\\source\\repos\\receptmegosztorepo\\projektbeadando\\receptmegosztosolution\\receptek.front\\wwwroot\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
@@ -57,10 +61,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{07242013-38B8-47D3-8500-82EBC845A8B2}|Receptek.Front\\Receptek.Front.csproj|c:\\users\\soosnm0901\\source\\repos\\receptmegosztorepo\\projektbeadando\\receptmegosztosolution\\receptek.front\\components\\pages\\receptekdetails.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{07242013-38B8-47D3-8500-82EBC845A8B2}|Receptek.Front\\Receptek.Front.csproj|solutionrelative:receptek.front\\components\\pages\\receptekdetails.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{07242013-38B8-47D3-8500-82EBC845A8B2}|Receptek.Front\\Receptek.Front.csproj|c:\\users\\soosnm0901\\source\\repos\\receptmegosztorepo\\projektbeadando\\receptmegosztosolution\\receptek.front\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{07242013-38B8-47D3-8500-82EBC845A8B2}|Receptek.Front\\Receptek.Front.csproj|solutionrelative:receptek.front\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4134ED95-0F43-410A-AA6F-6D3410325F29}|ReceptekApi\\ReceptekApi.csproj|c:\\users\\soosnm0901\\source\\repos\\receptmegosztorepo\\projektbeadando\\receptmegosztosolution\\receptekapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -153,24 +153,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 12,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "style.css",
-              "DocumentMoniker": "C:\\Users\\soosnm0901\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\Receptek.Front\\wwwroot\\style.css",
-              "RelativeDocumentMoniker": "Receptek.Front\\wwwroot\\style.css",
-              "ToolTip": "C:\\Users\\soosnm0901\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\Receptek.Front\\wwwroot\\style.css",
-              "RelativeToolTip": "Receptek.Front\\wwwroot\\style.css",
-              "ViewState": "AgIAAIQAAAAAAAAAAAAiwKIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2026-03-10T13:35:25.281Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "Routes.razor",
               "DocumentMoniker": "C:\\Users\\soosnm0901\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\Receptek.Front\\Components\\Routes.razor",
               "RelativeDocumentMoniker": "Receptek.Front\\Components\\Routes.razor",
@@ -182,7 +169,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Menu.razor",
               "DocumentMoniker": "C:\\Users\\soosnm0901\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\Receptek.Front\\Components\\Pages\\Menu.razor",
               "RelativeDocumentMoniker": "Receptek.Front\\Components\\Pages\\Menu.razor",
@@ -206,7 +193,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "App.razor",
               "DocumentMoniker": "C:\\Users\\soosnm0901\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\Receptek.Front\\Components\\App.razor",
               "RelativeDocumentMoniker": "Receptek.Front\\Components\\App.razor",
@@ -218,7 +205,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\soosnm0901\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\Receptek.Front\\Program.cs",
               "RelativeDocumentMoniker": "Receptek.Front\\Program.cs",
@@ -230,7 +217,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "MainLayout.razor",
               "DocumentMoniker": "C:\\Users\\soosnm0901\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\Receptek.Front\\Components\\Layout\\MainLayout.razor",
               "RelativeDocumentMoniker": "Receptek.Front\\Components\\Layout\\MainLayout.razor",
@@ -242,7 +229,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Login.razor",
               "DocumentMoniker": "C:\\Users\\soosnm0901\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\Receptek.Front\\Components\\Pages\\Login.razor",
               "RelativeDocumentMoniker": "Receptek.Front\\Components\\Pages\\Login.razor",
@@ -255,7 +242,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "Receptek.razor",
               "DocumentMoniker": "C:\\Users\\soosnm0901\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\Receptek.Front\\Components\\Pages\\Receptek.razor",
               "RelativeDocumentMoniker": "Receptek.Front\\Components\\Pages\\Receptek.razor",
@@ -279,7 +266,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "app.css",
               "DocumentMoniker": "C:\\Users\\soosnm0901\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\Receptek.Front\\wwwroot\\app.css",
               "RelativeDocumentMoniker": "Receptek.Front\\wwwroot\\app.css",
@@ -291,25 +278,25 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Register.razor",
               "DocumentMoniker": "C:\\Users\\soosnm0901\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\Receptek.Front\\Components\\Pages\\Register.razor",
               "RelativeDocumentMoniker": "Receptek.Front\\Components\\Pages\\Register.razor",
-              "ToolTip": "C:\\Users\\soosnm0901\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\Receptek.Front\\Components\\Pages\\Register.razor",
-              "RelativeToolTip": "Receptek.Front\\Components\\Pages\\Register.razor",
-              "ViewState": "AgIAABQAAAAAAAAAAAAQwDMAAAABAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\soosnm0901\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\Receptek.Front\\Components\\Pages\\Register.razor*",
+              "RelativeToolTip": "Receptek.Front\\Components\\Pages\\Register.razor*",
+              "ViewState": "AgIAADMAAAAAAAAAAAAswEsAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-03-17T10:05:00.078Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\soosnm0901\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\Receptek.Front\\appsettings.json",
               "RelativeDocumentMoniker": "Receptek.Front\\appsettings.json",
-              "ToolTip": "C:\\Users\\soosnm0901\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\Receptek.Front\\appsettings.json*",
-              "RelativeToolTip": "Receptek.Front\\appsettings.json*",
+              "ToolTip": "C:\\Users\\soosnm0901\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\Receptek.Front\\appsettings.json",
+              "RelativeToolTip": "Receptek.Front\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2026-03-10T13:18:57.164Z",
@@ -317,7 +304,32 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 2,
+              "Title": "Home.razor",
+              "DocumentMoniker": "C:\\Users\\soosnm0901\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\Receptek.Front\\Components\\Pages\\Home.razor",
+              "RelativeDocumentMoniker": "Receptek.Front\\Components\\Pages\\Home.razor",
+              "ToolTip": "C:\\Users\\soosnm0901\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\Receptek.Front\\Components\\Pages\\Home.razor",
+              "RelativeToolTip": "Receptek.Front\\Components\\Pages\\Home.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-10T13:42:49.33Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "style.css",
+              "DocumentMoniker": "C:\\Users\\soosnm0901\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\Receptek.Front\\wwwroot\\style.css",
+              "RelativeDocumentMoniker": "Receptek.Front\\wwwroot\\style.css",
+              "ToolTip": "C:\\Users\\soosnm0901\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\Receptek.Front\\wwwroot\\style.css",
+              "RelativeToolTip": "Receptek.Front\\wwwroot\\style.css",
+              "ViewState": "AgIAAIQAAAAAAAAAAAAiwKIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-03-10T13:35:25.281Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "ReceptekDetails.razor",
               "DocumentMoniker": "C:\\Users\\soosnm0901\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\Receptek.Front\\Components\\Pages\\ReceptekDetails.razor",
               "RelativeDocumentMoniker": "Receptek.Front\\Components\\Pages\\ReceptekDetails.razor",
@@ -329,7 +341,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "NavMenu.razor",
               "DocumentMoniker": "C:\\Users\\soosnm0901\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\Receptek.Front\\Components\\Layout\\NavMenu.razor",
               "RelativeDocumentMoniker": "Receptek.Front\\Components\\Layout\\NavMenu.razor",
@@ -341,7 +353,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "Receptek.Front.csproj",
               "DocumentMoniker": "C:\\Users\\soosnm0901\\Source\\Repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\Receptek.Front\\Receptek.Front.csproj",
               "RelativeDocumentMoniker": "Receptek.Front\\Receptek.Front.csproj",
@@ -350,18 +362,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2026-03-21T13:10:08.093Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Home.razor",
-              "DocumentMoniker": "C:\\Users\\soosnm0901\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\Receptek.Front\\Components\\Pages\\Home.razor",
-              "RelativeDocumentMoniker": "Receptek.Front\\Components\\Pages\\Home.razor",
-              "ToolTip": "C:\\Users\\soosnm0901\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\Receptek.Front\\Components\\Pages\\Home.razor",
-              "RelativeToolTip": "Receptek.Front\\Components\\Pages\\Home.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-03-10T13:42:49.33Z"
             },
             {
               "$type": "Document",
