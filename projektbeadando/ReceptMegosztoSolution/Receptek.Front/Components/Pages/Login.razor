@@ -1,5 +1,6 @@
 ﻿@page "/login"
 @inject HttpClient Http
+@inject NavigationManager Navigation
 @rendermode InteractiveServer
 
 <h3>Bejelentkezés</h3>
@@ -7,26 +8,45 @@
 <input @bind="username" placeholder="Felhasználónév" />
 <input @bind="password" type="password" placeholder="Jelszó" />
 
-<button @onclick="LoginUser">Login</button>
+<button @onclick="LoginUser" disabled="@isBusy">Login</button>
 
 <p>@message</p>
 
 @code {
-    string username;
-    string password;
-    string message;
+    string username = "";
+    string password = "";
+    string message = "";
+    bool isBusy = false;
 
     async Task LoginUser()
     {
-        var response = await Http.PostAsJsonAsync("api/auth/login", new
-        {
-            username = username,
-            password = password
-        });
+        if (isBusy) return;
+        isBusy = true;
+        message = "";
 
-        if (response.IsSuccessStatusCode)
-            message = "Sikeres login!";
-        else
-            message = "Hibás adatok";
+        try
+        {
+            var response = await Http.PostAsJsonAsync("api/auth/login", new
+            {
+                username = username,
+                password = password
+            });
+
+            if (response.IsSuccessStatusCode)
+            {
+                message = "Sikeres login!";
+                // navigate or update UI as needed
+                Navigation.NavigateTo("/");
+            }
+            else
+            {
+                var err = await response.Content.ReadAsStringAsync();
+                message = string.IsNullOrWhiteSpace(err) ? "Hibás adatok" : err;
+            }
+        }
+        finally
+        {
+            isBusy = false;
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿@page "/register"
 @inject HttpClient Http
+@inject NavigationManager Navigation
 @rendermode InteractiveServer
 
 <h3>Regisztráció</h3>
@@ -7,26 +8,45 @@
 <input @bind="username" placeholder="Felhasználónév" />
 <input @bind="password" type="password" placeholder="Jelszó" />
 
-<button @onclick="RegisterUser">Register</button>
+<button @onclick="RegisterUser" disabled="@isBusy">Register</button>
 
 <p>@message</p>
 
 @code {
-    string username;
-    string password;
-    string message;
+    string username = "";
+    string password = "";
+    string message = "";
+    bool isBusy = false;
 
     async Task RegisterUser()
     {
-        var response = await Http.PostAsJsonAsync("api/auth/register", new
-        {
-            Username = username,
-            PasswordHash = password
-        });
+        if (isBusy) return;
+        isBusy = true;
+        message = "";
 
-        if (response.IsSuccessStatusCode)
-            message = "Sikeres regisztráció!";
-        else
-            message = "Hiba történt";
+        try
+        {
+            // The API expects Users with 'username' and 'password' properties.
+            var response = await Http.PostAsJsonAsync("api/auth/register", new
+            {
+                username = username,
+                password = password
+            });
+
+            if (response.IsSuccessStatusCode)
+            {
+                message = "Sikeres regisztráció!";
+                Navigation.NavigateTo("/login");
+            }
+            else
+            {
+                var err = await response.Content.ReadAsStringAsync();
+                message = string.IsNullOrWhiteSpace(err) ? "Hiba történt" : err;
+            }
+        }
+        finally
+        {
+            isBusy = false;
+        }
     }
 }
