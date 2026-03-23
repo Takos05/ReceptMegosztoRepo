@@ -1,6 +1,8 @@
 ﻿@page "/receptek/{id:int}"
 @inject HttpClient Http
 @using ReceptekLibrary.MODELL
+@using System.Net
+@using System.Net.Http.Json
 @rendermode InteractiveServer
 
 <h3>Recept részletei</h3>
@@ -11,58 +13,247 @@
 }
 else if (recipe == null)
 {
-    <p>Loading...</p>
+    <p>Betöltés...</p>
 }
 else
 {
-    <div class="card">
+    <!-- Recept -->
+    <div class="card mb-4">
         <div class="card-body">
             <h4 class="card-title">@recipe.title</h4>
-            @if (!string.IsNullOrEmpty(recipe.image_url))
-            {
-                <img src="@recipe.image_url" alt="@recipe.title" class="img-fluid mb-3" />
-            }
-            <p>@recipe.description</p>
-            <ul>
-                <li>Előkészítés: @recipe.prep_time_min min</li>
-                <li>Sütés/főzés: @recipe.cook_time_min min</li>
+
+            <p style="white-space: pre-line">@recipe.description</p>
+
+            <ul class="mb-0">
+                <li>Előkészítés: @recipe.prep_time_min perc</li>
+                <li>Főzés / sütés: @recipe.cook_time_min perc</li>
                 <li>Adagok: @recipe.servings</li>
                 <li>Létrehozva: @recipe.created_at.ToString("yyyy-MM-dd")</li>
             </ul>
-            <a class="btn btn-secondary" href="/receptek">Vissza a listához</a>
         </div>
     </div>
+
+    <!-- Értékelés -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h4 class="card-title">Értékelés</h4>
+
+            @if (!string.IsNullOrEmpty(ratingErrorMessage))
+            {
+                <div class="alert alert-warning">@ratingErrorMessage</div>
+            }
+            else
+            {
+                <div class="d-flex align-items-center gap-3">
+                    <div style="font-size: 2rem; line-height: 1;">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            if (i <= roundedStars)
+                            {
+                                <span style="color: gold;">★</span>
+                            }
+                            else
+                            {
+                                <span style="color: lightgray;">☆</span>
+                            }
+                        }
+                    </div>
+
+                    <div>
+                        <strong>@averageRating.ToString("0.0") / 5</strong>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Kommentek -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h4 class="card-title">Kommentek</h4>
+
+            @if (commentsLoading)
+            {
+                <p>Kommentek betöltése...</p>
+            }
+            else if (!string.IsNullOrEmpty(commentsErrorMessage))
+            {
+                <div class="alert alert-warning">@commentsErrorMessage</div>
+            }
+            else if (comments == null || comments.Count == 0)
+            {
+                <p>Még nincs komment ehhez a recepthez.</p>
+            }
+            else
+            {
+                <div class="list-group">
+                    @foreach (var comment in comments.OrderByDescending(c => c.created_at))
+                    {
+                        <div class="list-group-item">
+                            <div class="d-flex justify-content-between">
+                                <strong>@GetUserName(comment.user_id)</strong>
+                                <small>@comment.created_at.ToString("yyyy-MM-dd HH:mm")</small>
+                            </div>
+                            <div class="mt-2">
+                                @comment.comment_text
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+
+    <a class="btn btn-secondary" href="/receptek">Vissza a listához</a>
 }
 
 @code {
     [Parameter]
     public int id { get; set; }
 
-    Recipes? recipe;
-    string? errorMessage;
+    private Recipes? recipe;
+
+    private double averageRating = 0;
+    private int roundedStars = 0;
+
+    private List<Comments> comments = new();
+    private List<Users> users = new();
+
+    private string? errorMessage;
+    private string? ratingErrorMessage;
+    private string? commentsErrorMessage;
+
+    private bool commentsLoading = true;
 
     protected override async Task OnInitializedAsync()
     {
+        await LoadAllData();
+    }
+
+    private async Task LoadAllData()
+    {
         try
         {
-            var response = await Http.GetAsync($"/api/Recipe/Recipes/{id}");
-            if (response.IsSuccessStatusCode)
+            await LoadRecipe();
+
+            if (recipe != null)
             {
-                recipe = await response.Content.ReadFromJsonAsync<Recipes>();
-            }
-            else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
-            {
-                errorMessage = "Recipe not found.";
-            }
-            else
-            {
-                var body = await response.Content.ReadAsStringAsync();
-                errorMessage = $"API error {(int)response.StatusCode} {response.ReasonPhrase}: {body}";
+                await LoadUsers();
+                await LoadRating();
+                await LoadComments();
             }
         }
         catch (Exception ex)
         {
-            errorMessage = $"Request failed: {ex.Message}";
+            errorMessage = $"Hiba történt: {ex.Message}";
         }
+    }
+
+    private async Task LoadRecipe()
+    {
+        var recipeResponse = await Http.GetAsync($"/api/Recipe/Recipes/{id}");
+
+        if (recipeResponse.IsSuccessStatusCode)
+        {
+            recipe = await recipeResponse.Content.ReadFromJsonAsync<Recipes>();
+        }
+        else if (recipeResponse.StatusCode == HttpStatusCode.NotFound)
+        {
+            errorMessage = "A recept nem található.";
+        }
+        else
+        {
+            var body = await recipeResponse.Content.ReadAsStringAsync();
+            errorMessage = $"Recept betöltési hiba {(int)recipeResponse.StatusCode} {recipeResponse.ReasonPhrase}: {body}";
+        }
+    }
+
+    private async Task LoadUsers()
+    {
+        try
+        {
+            var usersResponse = await Http.GetAsync("/api/User");
+
+            if (usersResponse.IsSuccessStatusCode)
+            {
+                users = await usersResponse.Content.ReadFromJsonAsync<List<Users>>() ?? new List<Users>();
+            }
+            else
+            {
+                users = new List<Users>();
+            }
+        }
+        catch
+        {
+            users = new List<Users>();
+        }
+    }
+
+    private async Task LoadRating()
+    {
+        try
+        {
+            var ratingResponse = await Http.GetAsync($"/api/Rating/averageByRecipe?recipeId={id}");
+
+            if (ratingResponse.IsSuccessStatusCode)
+            {
+                averageRating = await ratingResponse.Content.ReadFromJsonAsync<double>();
+                roundedStars = (int)Math.Round(averageRating, MidpointRounding.AwayFromZero);
+
+                if (roundedStars < 0) roundedStars = 0;
+                if (roundedStars > 5) roundedStars = 5;
+            }
+            else
+            {
+                var body = await ratingResponse.Content.ReadAsStringAsync();
+                ratingErrorMessage = $"Értékelés betöltési hiba {(int)ratingResponse.StatusCode} {ratingResponse.ReasonPhrase}: {body}";
+            }
+        }
+        catch (Exception ex)
+        {
+            ratingErrorMessage = $"Értékelés betöltése sikertelen: {ex.Message}";
+        }
+    }
+
+    private async Task LoadComments()
+    {
+        commentsLoading = true;
+
+        try
+        {
+            var commentsResponse = await Http.GetAsync($"/api/Recipe/comments/{id}");
+
+            if (commentsResponse.IsSuccessStatusCode)
+            {
+                comments = await commentsResponse.Content.ReadFromJsonAsync<List<Comments>>() ?? new List<Comments>();
+            }
+            else if (commentsResponse.StatusCode == HttpStatusCode.NotFound)
+            {
+                comments = new List<Comments>();
+            }
+            else
+            {
+                var body = await commentsResponse.Content.ReadAsStringAsync();
+                commentsErrorMessage = $"Komment betöltési hiba {(int)commentsResponse.StatusCode} {commentsResponse.ReasonPhrase}: {body}";
+            }
+        }
+        catch (Exception ex)
+        {
+            commentsErrorMessage = $"Kommentek betöltése sikertelen: {ex.Message}";
+        }
+        finally
+        {
+            commentsLoading = false;
+        }
+    }
+
+    private string GetUserName(int? userId)
+    {
+        if (!userId.HasValue)
+            return "Ismeretlen felhasználó";
+
+        var user = users.FirstOrDefault(u => u.user_id == userId.Value);
+
+        return user?.username ?? $"Felhasználó #{userId.Value}";
     }
 }

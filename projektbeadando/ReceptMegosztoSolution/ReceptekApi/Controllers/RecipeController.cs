@@ -74,13 +74,12 @@ namespace ReceptekApi.Controllers
             recipe.prep_time_min = updatedRecipe.prep_time_min;
             recipe.cook_time_min = updatedRecipe.cook_time_min;
             recipe.servings = updatedRecipe.servings;
-            recipe.image_url = updatedRecipe.image_url;
             _context.Entry(recipe).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return Ok(recipe);
         }
 
-        [HttpGet("comments")]
+        [HttpGet("comments/{recipeId}")]
         public async Task<IActionResult> GetCommentsForRecipe(int recipeId)
         {
             var comments = await _context.comments.Where(c => c.recipe_id == recipeId).ToListAsync();

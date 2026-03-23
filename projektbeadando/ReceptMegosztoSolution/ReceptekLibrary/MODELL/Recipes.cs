@@ -17,7 +17,6 @@ namespace ReceptekLibrary.MODELL
         public int prep_time_min { get; set; }
         public int cook_time_min { get; set; }
         public int servings { get; set; }
-        public string image_url { get; set; }
         public DateTime created_at { get; set; }
 
     }

@@ -328,7 +328,7 @@
         }
       }
     },
-    "/api/Recipe/comments": {
+    "/api/Recipe/comments/{recipeId}": {
       "get": {
         "tags": [
           "Recipe"
@@ -336,7 +336,8 @@
         "parameters": [
           {
             "name": "recipeId",
-            "in": "query",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -504,10 +505,6 @@
           "servings": {
             "type": "integer",
             "format": "int32"
-          },
-          "image_url": {
-            "type": "string",
-            "nullable": true
           },
           "created_at": {
             "type": "string",

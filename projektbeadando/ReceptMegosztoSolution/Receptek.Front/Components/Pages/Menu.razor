@@ -6,6 +6,8 @@
 <div class="menuBody">
     <div class="tagekSidebar">
 
+        <button type="button" @onclick="menuCreate" class="menuButton">Menü készítése</button>
+
         @foreach(var category in tagek){
             <h5>@category.Key</h5>
             foreach (var tag in category.Value)
@@ -18,8 +20,6 @@
                 <br>
             }
         }
-
-        <button type="button" @onclick="menuCreate" class="menuButton">Menü készítése</button>
     </div>
 
     <div class="menuTableDiv">
@@ -43,10 +43,6 @@
                                     <a href="@($"/receptek/{menu[i].recipe_id}")" class="text-decoration-none text-dark">
                                         <div class="card-body">
                                             <h5 class="card-title">@menu[i].title</h5>
-                                            @if (!string.IsNullOrEmpty(menu[i].image_url))
-                                            {
-                                                <img src="@menu[i].image_url" alt="@menu[i].title" class="img-fluid mb-2" />
-                                            }
                                             <p class="card-text">@menu[i].description</p>
                                         </div>
                                     </a>

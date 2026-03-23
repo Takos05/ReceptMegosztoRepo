@@ -21,10 +21,6 @@ else if (serverRecipes?.Count > 0)
             <a href="@($"/receptek/{recept.recipe_id}")" class="text-decoration-none text-dark">
                 <div class="card-body">
                     <h5 class="card-title">@recept.title</h5>
-                    @if (!string.IsNullOrEmpty(recept.image_url))
-                    {
-                        <img src="@recept.image_url" alt="@recept.title" class="img-fluid mb-2" />
-                    }
                     <p class="card-text">@recept.description</p>
                 </div>
             </a>

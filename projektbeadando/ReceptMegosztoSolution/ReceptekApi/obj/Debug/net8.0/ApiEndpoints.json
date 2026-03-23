@@ -150,7 +150,7 @@
   {
     "ContainingType": "ReceptekApi.Controllers.RecipeController",
     "Method": "GetCommentsForRecipe",
-    "RelativePath": "api/Recipe/comments",
+    "RelativePath": "api/Recipe/comments/{recipeId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -158,7 +158,7 @@
       {
         "Name": "recipeId",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
