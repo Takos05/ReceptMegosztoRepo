@@ -6,6 +6,7 @@
 <h3>Bejelentkezés</h3>
 
 <input @bind="username" placeholder="Felhasználónév" />
+<input @bind="email" placeholder="Email" />
 <input @bind="password" type="password" placeholder="Jelszó" />
 
 <button @onclick="LoginUser" disabled="@isBusy">Login</button>
@@ -14,6 +15,7 @@
 
 @code {
     string username = "";
+    string email = "";
     string password = "";
     string message = "";
     bool isBusy = false;
@@ -29,13 +31,13 @@
             var response = await Http.PostAsJsonAsync("api/auth/login", new
             {
                 username = username,
+                email = email,
                 password = password
             });
 
             if (response.IsSuccessStatusCode)
             {
                 message = "Sikeres login!";
-                // navigate or update UI as needed
                 Navigation.NavigateTo("/");
             }
             else
