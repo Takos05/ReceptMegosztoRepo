@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ReceptekLibrary.DATA;
 using ReceptekLibrary.MODELL;
+using ReceptekApi.API.AuthService;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -10,17 +11,19 @@ using System.Text;
 public class AuthController : ControllerBase
 {
     private readonly ReceptekDbContext _context;
+    private readonly JWTTokenService _jwt;
 
-    public AuthController(ReceptekDbContext context)
+    public AuthController(ReceptekDbContext context, JWTTokenService jwt)
     {
         _context = context;
+        _jwt = jwt;
     }
 
     [HttpPost("register")]
     public async Task<IActionResult> Register(Users user)
     {
         if (await _context.users.AnyAsync(u => u.username == user.username))
-            return BadRequest("User exists");
+            return BadRequest("User exists/ A felhasználó létezik");
 
         user.password = HashPassword(user.password);
 
@@ -31,17 +34,24 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("login")]
-    public async Task<IActionResult> Login(Users user)
+    public async Task<IActionResult> Login(Users login)
     {
-        var hash = HashPassword(user.password);
+        var hash = HashPassword(login.password);
 
-        var exists = await _context.users
-            .AnyAsync(u => u.username == user.username && u.password == hash);
+        var user = await _context.users
+            .FirstOrDefaultAsync(u => u.username == login.username && u.password == hash);
 
-        if (!exists)
+        if (user == null)
             return Unauthorized();
 
-        return Ok();
+        var roles = new List<string> { "User" };
+
+        var token = _jwt.CreateToken(user, roles);
+
+        return Ok(new
+        {
+            token = token
+        });
     }
 
     private string HashPassword(string password)
