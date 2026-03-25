@@ -1,24 +1,49 @@
 ﻿@page "/"
 
-<!-- HERO SZEKCIÓ -->
-<div class="hero-section">
-    <div class="overlay">
-        <div class="content text-center">
+<div class="hero-wrapper">
 
-            <h1 class="display-3 fw-bold mb-3">
-                ReceptMegosztó
-            </h1>
+    <!-- BAL OLDAL – RECEPTEK -->
+    <div class="hero-box">
+        <div class="overlay">
+            <div class="content text-center">
 
-            <p class="lead mb-4">
-                Inspirálódj, főzz, és oszd meg a kedvenc receptjeidet!
-            </p>
+                <h1 class="display-4 fw-bold mb-3">
+                    Receptek
+                </h1>
 
-            <a href="/receptek" class="btn btn-primary btn-lg">
-                Receptek felfedezése
-            </a>
+                <p class="lead mb-4">
+                    Fedezd fel a legjobb ételeket!
+                </p>
 
+                <a href="/receptek" class="btn btn-primary btn-lg">
+                    Receptek felfedezése
+                </a>
+
+            </div>
         </div>
     </div>
+
+    <!-- JOBB OLDAL – REGISZTRÁCIÓ -->
+    <div class="hero-box">
+        <div class="overlay">
+            <div class="content text-center">
+
+                <h1 class="display-4 fw-bold mb-3">
+                    Regisztráció
+                </h1>
+
+                <p class="lead mb-4">
+                    Csatlakozz és oszd meg a receptjeidet!
+                </p>
+
+                <a href="/register" class="btn btn-success btn-lg">
+                    Regisztráció
+                </a>
+
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <!-- ALSÓ RÉSZ -->
@@ -44,7 +69,6 @@
 </div>
 
 <style>
-    /* 🌍 TELJES OLDAL HÁTTÉR (2. kép) */
     body {
         background-image: url('/food-with-from-multiple-culture.png');
         background-size: cover;
@@ -52,13 +76,18 @@
         background-attachment: fixed;
     }
 
-    /* 🖼 HERO KÉP (1. kép) */
-    .hero-section {
+    .hero-wrapper {
+        display: flex;
         height: 90vh;
-        background-image: url('/food-on-the-table-from-an-upper-perspective.png');
-        background-size: cover;
-        background-position: center;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .hero-box {
+        flex: 1;
         position: relative;
+        border-radius: 15px;
+        overflow: hidden;
     }
 
     .overlay {
@@ -71,11 +100,12 @@
 
     .content {
         color: white;
-        max-width: 700px;
         padding: 20px;
     }
 
     .info-section {
-        background-color: black;
+        background-color: slategrey;
     }
+
+    
 </style>

@@ -4723,23 +4723,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\soosnm0901\\.nuget\\packages\\": {},
+    "C:\\Users\\nagyz\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\soosnm0901\\Source\\Repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\ReceptekLibrary.csproj",
+      "projectUniqueName": "C:\\Users\\nagyz\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\ReceptekLibrary.csproj",
       "projectName": "ReceptekLibrary",
-      "projectPath": "C:\\Users\\soosnm0901\\Source\\Repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\ReceptekLibrary.csproj",
-      "packagesPath": "C:\\Users\\soosnm0901\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\soosnm0901\\Source\\Repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\obj\\",
+      "projectPath": "C:\\Users\\nagyz\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\ReceptekLibrary.csproj",
+      "packagesPath": "C:\\Users\\nagyz\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\nagyz\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\soosnm0901\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\nagyz\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4752,6 +4752,7 @@
       },
       "frameworks": {
         "net8.0": {
+          "framework": "net8.0",
           "targetAlias": "net8.0",
           "projectReferences": {}
         }
@@ -4766,10 +4767,11 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "10.0.100"
+      "SdkAnalysisLevel": "10.0.200"
     },
     "frameworks": {
       "net8.0": {
+        "framework": "net8.0",
         "targetAlias": "net8.0",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": {
@@ -4809,7 +4811,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
