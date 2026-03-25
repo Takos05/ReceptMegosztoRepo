@@ -700,3 +700,4 @@ C:\Users\nagyz\source\repos\ReceptMegosztoRepo\projektbeadando\ReceptMegosztoSol
 C:\Users\nagyz\source\repos\ReceptMegosztoRepo\projektbeadando\ReceptMegosztoSolution\ReceptekApi\obj\Debug\net8.0\ReceptekApi.pdb
 C:\Users\nagyz\source\repos\ReceptMegosztoRepo\projektbeadando\ReceptMegosztoSolution\ReceptekApi\obj\Debug\net8.0\ReceptekApi.genruntimeconfig.cache
 C:\Users\nagyz\source\repos\ReceptMegosztoRepo\projektbeadando\ReceptMegosztoSolution\ReceptekApi\obj\Debug\net8.0\ref\ReceptekApi.dll
+C:\Users\soosnm0901\Source\Repos\ReceptMegosztoRepo\projektbeadando\ReceptMegosztoSolution\ReceptekApi\obj\Debug\net8.0\swae.build.ex.cache

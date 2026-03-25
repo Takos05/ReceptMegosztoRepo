@@ -42,7 +42,7 @@ public class AuthController : ControllerBase
             .FirstOrDefaultAsync(u => u.username == login.username && u.password == hash);
 
         if (user == null)
-            return Unauthorized();
+            return Unauthorized("Sikertelen bejelentkezés");
 
         var roles = new List<string> { "User" };
 

@@ -68,6 +68,31 @@ else
     </div>
 
     <!-- Kommentek -->
+
+    <AuthorizeView>
+    <Authorized>
+        <div class="mt-4">
+            <h5>Írj kommentet</h5>
+
+            <textarea class="form-control"
+                      @bind="ujKomment"
+                      placeholder="Írd ide a véleményed..."
+                      rows="4">
+            </textarea>
+
+            <button class="btn btn-primary mt-2" @onclick="KommentKuldes">
+                Küldés
+            </button>
+        </div>
+    </Authorized>
+
+    <NotAuthorized>
+        <p class="text-muted mt-3">
+            Komment írásához jelentkezz be.
+        </p>
+    </NotAuthorized>
+</AuthorizeView>
+
     <div class="card mb-4">
         <div class="card-body">
             <h4 class="card-title">Kommentek</h4>
@@ -108,6 +133,19 @@ else
 }
 
 @code {
+    
+    private string ujKomment;
+
+    private async Task KommentKuldes()
+    {
+        if (string.IsNullOrWhiteSpace(ujKomment))
+            return;
+
+        // TODO: mentsd el adatbázisba
+        // pl: await KommentService.Hozzaad(...);
+
+        ujKomment = string.Empty;
+    }
     [Parameter]
     public int id { get; set; }
 

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ReceptekLibrary")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d0fe51b91545306165fbea77e709444c74b09948")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2e04d77d59988c86e140235ab1497cd3f0e443c3")]
 [assembly: System.Reflection.AssemblyProductAttribute("ReceptekLibrary")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ReceptekLibrary")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
