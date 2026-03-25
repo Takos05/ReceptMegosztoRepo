@@ -1,13 +1,7 @@
 ﻿@page "/"
 
-<div class="home-container">
-
-    <!-- 🔥 IDE TUDSZ BACKGROUND KÉPET TENNI
-         .home-container {
-             background-image: url('images/hatter.jpg');
-         }
-    -->
-
+<!-- HERO SZEKCIÓ -->
+<div class="hero-section">
     <div class="overlay">
         <div class="content text-center">
 
@@ -16,7 +10,7 @@
             </h1>
 
             <p class="lead mb-4">
-                Inspirálódj, főzz, és oszd meg a kedvenc receptjeidet másokkal!
+                Inspirálódj, főzz, és oszd meg a kedvenc receptjeidet!
             </p>
 
             <a href="/receptek" class="btn btn-primary btn-lg">
@@ -27,7 +21,7 @@
     </div>
 </div>
 
-<!-- EXTRA kis info szekció lent -->
+<!-- ALSÓ RÉSZ -->
 <div class="info-section text-center py-5">
     <h2>Mit találsz itt?</h2>
 
@@ -50,19 +44,25 @@
 </div>
 
 <style>
-    .home-container {
-        height: 90vh;
-        /* 🔥 IDE VAGY IDE TEGYÉL BACKGROUND KÉPET
-               background-image: url('images/hatter.jpg');
-            */
+    /* 🌍 TELJES OLDAL HÁTTÉR (2. kép) */
+    body {
+        background-image: url('/food-with-from-multiple-culture.png');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
 
+    /* 🖼 HERO KÉP (1. kép) */
+    .hero-section {
+        height: 90vh;
+        background-image: url('/food-on-the-table-from-an-upper-perspective.png');
         background-size: cover;
         background-position: center;
         position: relative;
     }
 
     .overlay {
-        background-color: rgba(0, 0, 0, 0.65);
+        background-color: rgba(0, 0, 0, 0.6);
         height: 100%;
         display: flex;
         align-items: center;
@@ -76,6 +76,6 @@
     }
 
     .info-section {
-        background-color: #f8f9fa;
+        background-color: black;
     }
 </style>
