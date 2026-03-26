@@ -9,7 +9,7 @@ namespace ReceptekApi.API.AuthService
     /// </summary>
     public sealed class PasswordService
     {
-        private readonly PasswordHasher<string> _passwordHasher =new();
+        private readonly PasswordHasher<string> _passwordHasher = new();
 
         /// <summary>
         /// Elkészíti a jelszó hash-ét a megadott felhasználónév és jelszó alapján.

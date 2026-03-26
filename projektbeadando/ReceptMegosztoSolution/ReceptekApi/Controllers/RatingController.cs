@@ -19,7 +19,7 @@ namespace ReceptekApi.Controllers
         [HttpGet("averageByRecipe")]
         public IActionResult GetAverageRatingByRecipe(int recipeId)
         {
-            var ratingsList = _context.ratings.Where(r => r.recipe_id == recipeId).ToList();
+            var ratingsList = _context.Ratings.Where(r => r.recipe_id == recipeId).ToList();
             if (ratingsList.Count == 0)
             {
                 return Ok(0);
@@ -31,7 +31,7 @@ namespace ReceptekApi.Controllers
         [HttpPost]
         public IActionResult AddRating(Ratings rating)
         {
-            _context.ratings.Add(rating);
+            _context.Ratings.Add(rating);
             _context.SaveChanges();
             return Ok();
         }
@@ -39,12 +39,12 @@ namespace ReceptekApi.Controllers
         [HttpDelete]
         public IActionResult DeleteRating(int ratingId)
         {
-            var rating = _context.ratings.FirstOrDefault(r => r.rating_id == ratingId);
+            var rating = _context.Ratings.FirstOrDefault(r => r.rating_id == ratingId);
             if (rating == null)
             {
                 return NotFound();
             }
-            _context.ratings.Remove(rating);
+            _context.Ratings.Remove(rating);
             _context.SaveChanges();
             return Ok();
         }

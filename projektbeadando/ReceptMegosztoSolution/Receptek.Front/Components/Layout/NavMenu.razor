@@ -1,47 +1,7 @@
-﻿<div class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container-fluid">
-        <button class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNav"
-                aria-controls="navbarNav"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto mb-2 mb-lg-0 align-items-center">
-                <li class="nav-item">
-                    <NavLink class="nav-link d-flex align-items-center" href="" Match="NavLinkMatch.All">
-                        Főoldal
-                    </NavLink>
-                </li>
-
-                <li class="nav-item">
-                    <NavLink class="nav-link d-flex align-items-center" href="receptek">
-                        Receptek
-                    </NavLink>
-                </li>
-
-                <li class="nav-item">
-                    <NavLink class="nav-link d-flex align-items-center" href="menu">
-                        Menü
-                    </NavLink>
-                </li>
-
-                <li class="nav-item">
-                    <NavLink class="nav-link d-flex align-items-center" href="login">
-                        Login
-                    </NavLink>
-                </li>
-
-                <li class="nav-item">
-                    <NavLink class="nav-link d-flex align-items-center" href="register">
-                        Register
-                    </NavLink>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
+﻿<nav class="top-nav">
+    <NavLink href="/" Match="NavLinkMatch.All">Főoldal</NavLink>
+    <NavLink href="/receptek">Receptek</NavLink>
+    <NavLink href="/menu">Menü</NavLink>
+    <NavLink href="/login">Login</NavLink>
+    <NavLink href="/register">Register</NavLink>
+</nav>

@@ -1,12 +1,30 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-        <NavMenu @rendermode="InteractiveServer" />
+@using Microsoft.AspNetCore.Components.Authorization
 
-    <main style="padding-top: 5%">
+<div class="page-layout">
+    <header class="top-header">
+        <div class="top-header-left">
+            <AuthorizeView>
+                <Authorized>
+                    <span>🟢 Bejelentkezve: <strong>@context.User.Identity?.Name</strong></span>
+                </Authorized>
+                <NotAuthorized>
+                    <span>⚪ Nincs bejelentkezve</span>
+                </NotAuthorized>
+            </AuthorizeView>
+        </div>
+
+        <div class="top-header-right">
+            <NavMenu @rendermode="InteractiveServer" />
+        </div>
+    </header>
+
+    <main class="main-content">
         <article class="content px-4">
             @Body
         </article>
+
         <Footer />
     </main>
 </div>

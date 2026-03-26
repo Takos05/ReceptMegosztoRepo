@@ -8,14 +8,15 @@
 
         <button type="button" @onclick="menuCreate" class="menuButton">Menü készítése</button>
 
-        @foreach(var category in tagek){
+        @foreach (var category in tagek)
+        {
             <h5>@category.Key</h5>
             foreach (var tag in category.Value)
             {
                 <input type="checkbox"
-                id="@tag"
-                checked="@selectedTags.Contains(tag)"
-                @onchange="(ChangeEventArgs e) => ToggleTag(tag, (bool)e.Value)">
+                       id="@tag"
+                       checked="@selectedTags.Contains(tag)"
+                       @onchange="(ChangeEventArgs e) => ToggleTag(tag, (bool)e.Value)">
                 <label for="@tag">@tag</label>
                 <br>
             }

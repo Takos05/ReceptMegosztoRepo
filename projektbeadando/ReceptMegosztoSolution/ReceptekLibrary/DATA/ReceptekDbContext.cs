@@ -14,13 +14,13 @@ namespace ReceptekLibrary.DATA
         {
 
         }
-        public DbSet<Recipes> recipes { get; set; }
+        public DbSet<Recipes> Recipes { get; set; }
         public DbSet<Tags> tags { get; set; }
         public DbSet<Tag_Categories> tag_Categories { get; set; }
         public DbSet<Recipe_Tags> recipe_Tags { get; set; }
         public DbSet<User_Default_Tags> user_Default_Tags { get; set; }
         public DbSet<Users> users { get; set; }
-        public DbSet<Ratings> ratings { get; set; }
+        public DbSet<Ratings> Ratings { get; set; }
         public DbSet<Comments> comments { get; set; }
     }
 }

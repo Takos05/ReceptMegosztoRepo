@@ -4,6 +4,9 @@
 @using System.Net
 @using System.Net.Http.Json
 @rendermode InteractiveServer
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthStateProvider
+@using System.Security.Claims
 
 <h3>Recept részletei</h3>
 
@@ -68,30 +71,27 @@ else
     </div>
 
     <!-- Kommentek -->
-
-    <AuthorizeView>
-    <Authorized>
+    @if (isLoggedIn)
+    {
         <div class="mt-4">
             <h5>Írj kommentet</h5>
 
             <textarea class="form-control"
                       @bind="ujKomment"
                       placeholder="Írd ide a véleményed..."
-                      rows="4">
-            </textarea>
+                      rows="4"></textarea>
 
             <button class="btn btn-primary mt-2" @onclick="KommentKuldes">
                 Küldés
             </button>
         </div>
-    </Authorized>
-
-    <NotAuthorized>
+    }
+    else
+    {
         <p class="text-muted mt-3">
             Komment írásához jelentkezz be.
         </p>
-    </NotAuthorized>
-</AuthorizeView>
+    }
 
     <div class="card mb-4">
         <div class="card-body">
@@ -134,15 +134,9 @@ else
 
 @code {
     
-    private string ujKomment;
+    private string ujKomment = string.Empty;
 
-    private async Task KommentKuldes()
-    {
-        if (string.IsNullOrWhiteSpace(ujKomment))
-            return;
-
-        ujKomment = string.Empty;
-    }
+    
     [Parameter]
     public int id { get; set; }
 
@@ -160,8 +154,14 @@ else
 
     private bool commentsLoading = true;
 
+    private ClaimsPrincipal? currentUser;
+    private bool isLoggedIn;
+    private string? currentUserName;
+    private int? currentUserId;
+
     protected override async Task OnInitializedAsync()
     {
+        await LoadCurrentUser();
         await LoadAllData();
     }
 
@@ -221,6 +221,16 @@ else
         catch
         {
             users = new List<Users>();
+        }
+
+        if (isLoggedIn && currentUserId == null && !string.IsNullOrWhiteSpace(currentUserName))
+        {
+            var matchedUser = users.FirstOrDefault(u => u.username == currentUserName);
+
+            if (matchedUser != null)
+            {
+                currentUserId = matchedUser.user_id;
+            }
         }
     }
 
@@ -291,4 +301,67 @@ else
 
         return user?.username ?? $"Felhasználó #{userId.Value}";
     }
+
+    private async Task LoadCurrentUser()
+    {
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        currentUser = authState.User;
+
+        isLoggedIn = currentUser.Identity?.IsAuthenticated ?? false;
+        currentUserName = currentUser.Identity?.Name;
+
+        var userIdClaim = currentUser.FindFirst(ClaimTypes.NameIdentifier)?.Value
+                         ?? currentUser.FindFirst("sub")?.Value
+                         ?? currentUser.FindFirst("userid")?.Value
+                         ?? currentUser.FindFirst("user_id")?.Value;
+
+        if (int.TryParse(userIdClaim, out var parsedUserId))
+            currentUserId = parsedUserId;
+        else
+            currentUserId = null;
+    }
+    private async Task KommentKuldes()
+    {
+        if (!isLoggedIn)
+        {
+            commentsErrorMessage = "Komment írásához jelentkezz be.";
+            return;
+        }
+
+        if (currentUserId == null)
+        {
+            commentsErrorMessage = "A felhasználó azonosítója nem található a bejelentkezésben.";
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(ujKomment))
+        {
+            commentsErrorMessage = "A komment nem lehet üres.";
+            return;
+        }
+
+        commentsErrorMessage = null;
+
+        var uj = new Comments
+        {
+            recipe_id = id,
+            user_id = currentUserId.Value,
+            comment_text = ujKomment.Trim(),
+            created_at = DateTime.Now
+        };
+
+        var response = await Http.PostAsJsonAsync("/api/Comment", uj);
+
+        if (response.IsSuccessStatusCode)
+        {
+            ujKomment = string.Empty;
+            await LoadComments();
+        }
+        else
+        {
+            var body = await response.Content.ReadAsStringAsync();
+            commentsErrorMessage = $"Komment küldési hiba {(int)response.StatusCode}: {body}";
+        }
+    }
+
 }

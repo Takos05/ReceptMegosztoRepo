@@ -22,6 +22,10 @@ body {
     background-color: var(--bg);
     color: var(--text);
     font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", Arial, sans-serif;
+    background-image: url('/food-with-from-multiple-culture.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 /* NAVBAR */

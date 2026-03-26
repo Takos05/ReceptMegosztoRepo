@@ -21,14 +21,14 @@ namespace ReceptekApi.Controllers
         [HttpGet()]
         public async Task<IActionResult> GetRecipes()
         {
-            var recipes = await _context.recipes.ToListAsync();
+            var recipes = await _context.Recipes.ToListAsync();
             return Ok(recipes);
         }
 
         [HttpGet("Recipes/{id}")]
         public async Task<IActionResult> GetRecipeById(int id)
         {
-            var recipe = await _context.recipes.FindAsync(id);
+            var recipe = await _context.Recipes.FindAsync(id);
             if (recipe == null)
             {
                 return NotFound();
@@ -39,7 +39,7 @@ namespace ReceptekApi.Controllers
         [HttpPost()]
         public async Task<IActionResult> CreateRecipe(Recipes recipe)
         {
-            _context.recipes.Add(recipe);
+            _context.Recipes.Add(recipe);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetRecipeById), new { id = recipe.recipe_id }, recipe);
         }
@@ -47,12 +47,12 @@ namespace ReceptekApi.Controllers
         [HttpDelete("Recipes/{id}")]
         public async Task<IActionResult> DeleteRecipe(int id)
         {
-            var recipe = await _context.recipes.FindAsync(id);
+            var recipe = await _context.Recipes.FindAsync(id);
             if (recipe == null)
             {
                 return NotFound();
             }
-            _context.recipes.Remove(recipe);
+            _context.Recipes.Remove(recipe);
             await _context.SaveChangesAsync();
             return NoContent();
         }
@@ -64,7 +64,7 @@ namespace ReceptekApi.Controllers
             {
                 return BadRequest();
             }
-            var recipe = await _context.recipes.FindAsync(id);
+            var recipe = await _context.Recipes.FindAsync(id);
             if (recipe == null)
             {
                 return NotFound();

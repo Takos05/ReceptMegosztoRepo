@@ -1,54 +1,43 @@
 ﻿@page "/login"
-@inject HttpClient Http
+@using global::Receptek.Front.MODEL
 @inject NavigationManager Navigation
 @rendermode InteractiveServer
 
 <h3>Bejelentkezés</h3>
 
-<input @bind="username" placeholder="Felhasználónév" />
-<input @bind="email" placeholder="Email" />
-<input @bind="password" type="password" placeholder="Jelszó" />
+@if (showError)
+{
+    <p style="color:red;">Sikertelen bejelentkezés.</p>
+}
 
-<button @onclick="LoginUser" disabled="@isBusy">Login</button>
+<form method="post" action="/auth/login-form">
+    <input type="hidden" name="returnUrl" value="/" />
 
-<p>@message</p>
+    <div>
+        <label for="username">Felhasználónév:</label><br />
+        <input id="username" name="Username" value="@model.Username" />
+    </div>
+
+    <div>
+        <label for="password">Jelszó:</label><br />
+        <input id="password" name="Password" type="password" value="@model.Password" />
+    </div>
+
+    <button type="submit">Belépés</button>
+</form>
 
 @code {
-    string username = "";
-    string email = "";
-    string password = "";
-    string message = "";
-    bool isBusy = false;
+    private LoginRequest model = new();
+    private bool showError = false;
 
-    async Task LoginUser()
+    protected override void OnInitialized()
     {
-        if (isBusy) return;
-        isBusy = true;
-        message = "";
+        
+        var uri = Navigation.ToAbsoluteUri(Navigation.Uri);
 
-        try
+        if (uri.Query.Contains("error=1"))
         {
-            var response = await Http.PostAsJsonAsync("api/auth/login", new
-            {
-                username = username,
-                email = email,
-                password = password
-            });
-
-            if (response.IsSuccessStatusCode)
-            {
-                message = "Sikeres login!";
-                Navigation.NavigateTo("/");
-            }
-            else
-            {
-                var err = await response.Content.ReadAsStringAsync();
-                message = string.IsNullOrWhiteSpace(err) ? "Hibás adatok" : err;
-            }
-        }
-        finally
-        {
-            isBusy = false;
+            showError = true;
         }
     }
 }
