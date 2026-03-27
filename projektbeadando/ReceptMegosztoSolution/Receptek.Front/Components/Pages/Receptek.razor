@@ -7,21 +7,25 @@
 
 <h3>Receptek</h3>
 
-
+<input class="form-control mb-3"
+       placeholder="Keresés recept név alapján..."
+       @bind="searchText"
+       @oninput="SearchChanged" />
 
 @if (!string.IsNullOrEmpty(errorMessage))
 {
     <div class="alert alert-danger">@errorMessage</div>
 }
-else if (serverRecipes?.Count > 0)
+else if (FilteredRecipes?.Count > 0)
 {
-    @foreach (var recept in serverRecipes)
+    @foreach (var recept in FilteredRecipes)
     {
         <div class="card mb-3">
             <a href="@($"/receptek/{recept.recipe_id}")" class="text-decoration-none text-dark">
                 <div class="card-body">
                     <h5 class="card-title">@recept.title</h5>
                     <p class="card-text">@recept.description</p>
+                    <p>Értékelés: ⭐ @GetRating(recept.recipe_id)</p>
                 </div>
             </a>
         </div>
@@ -33,52 +37,40 @@ else
 }
 
 @code {
-    List<Recipe> recipes = new();
-    List<Recipe> FilteredRecipes = new();
-    List<string> Countries = new();
-    Recipe newRecipe = new();
 
     List<Recipes> serverRecipes = new();
+    List<Recipes> FilteredRecipes = new();
+    Dictionary<int, double> ratings = new();
+
+    string searchText = "";
     string? errorMessage;
 
-    protected override void OnInitialized()
+    void SearchChanged(ChangeEventArgs e)
     {
-        FilteredRecipes = recipes.ToList();
-        Countries = recipes.Select(r => r.Country).Distinct().Where(s => !string.IsNullOrEmpty(s)).ToList();
+        searchText = e.Value?.ToString() ?? "";
+        FilterRecipes();
     }
 
-    void FilterChanged(ChangeEventArgs e)
+    void FilterRecipes()
     {
-        var value = e.Value?.ToString();
-
-        if (value == "all")
-            FilteredRecipes = recipes.ToList();
-        else
-            FilteredRecipes = recipes.Where(r => r.Country == value).ToList();
-    }
-
-    void AddRecipe()
-    {
-        recipes.Add(new Recipe
+        if (string.IsNullOrWhiteSpace(searchText))
         {
-            Name = newRecipe.Name,
-            Desc = newRecipe.Desc,
-            Time = newRecipe.Time,
-            Country = newRecipe.Country
-        });
-
-        newRecipe = new Recipe();
-
-        Countries = recipes.Select(r => r.Country).Distinct().Where(s => !string.IsNullOrEmpty(s)).ToList();
-        FilteredRecipes = recipes.ToList();
+            FilteredRecipes = serverRecipes;
+        }
+        else
+        {
+            FilteredRecipes = serverRecipes
+                .Where(r => r.title.ToLower().Contains(searchText.ToLower()))
+                .ToList();
+        }
     }
 
-    class Recipe
+    double GetRating(int recipeId)
     {
-        public string Name { get; set; }
-        public string Desc { get; set; }
-        public string Time { get; set; }
-        public string Country { get; set; }
+        if (ratings.ContainsKey(recipeId))
+            return Math.Round(ratings[recipeId], 1);
+
+        return 0;
     }
 
     protected override async Task OnInitializedAsync()
@@ -86,9 +78,26 @@ else
         try
         {
             var response = await Http.GetAsync("/api/Recipe");
+
             if (response.IsSuccessStatusCode)
             {
                 serverRecipes = await response.Content.ReadFromJsonAsync<List<Recipes>>() ?? new List<Recipes>();
+                FilteredRecipes = serverRecipes;
+
+                foreach (var recipe in serverRecipes)
+                {
+                    try
+                    {
+                        var avg = await Http.GetFromJsonAsync<double>(
+                            $"/api/Rating/averageByRecipe?recipeId={recipe.recipe_id}");
+
+                        ratings[recipe.recipe_id] = avg;
+                    }
+                    catch
+                    {
+                        ratings[recipe.recipe_id] = 0;
+                    }
+                }
             }
             else
             {
@@ -102,3 +111,4 @@ else
         }
     }
 }
+```

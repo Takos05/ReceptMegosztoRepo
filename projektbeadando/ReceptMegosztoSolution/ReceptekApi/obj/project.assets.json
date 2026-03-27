@@ -4865,23 +4865,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\akos\\.nuget\\packages\\": {},
+    "C:\\Users\\nagyz\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\akos\\Desktop\\Repos\\Projekt\\projektbeadando\\ReceptMegosztoSolution\\ReceptekApi\\ReceptekApi.csproj",
+      "projectUniqueName": "C:\\Users\\nagyz\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekApi\\ReceptekApi.csproj",
       "projectName": "ReceptekApi",
-      "projectPath": "C:\\Users\\akos\\Desktop\\Repos\\Projekt\\projektbeadando\\ReceptMegosztoSolution\\ReceptekApi\\ReceptekApi.csproj",
-      "packagesPath": "C:\\Users\\akos\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\akos\\Desktop\\Repos\\Projekt\\projektbeadando\\ReceptMegosztoSolution\\ReceptekApi\\obj\\",
+      "projectPath": "C:\\Users\\nagyz\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekApi\\ReceptekApi.csproj",
+      "packagesPath": "C:\\Users\\nagyz\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\nagyz\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\akos\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\nagyz\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4890,15 +4890,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
+          "framework": "net8.0",
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\akos\\Desktop\\Repos\\Projekt\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\ReceptekLibrary.csproj": {
-              "projectPath": "C:\\Users\\akos\\Desktop\\Repos\\Projekt\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\ReceptekLibrary.csproj"
+            "C:\\Users\\nagyz\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\ReceptekLibrary.csproj": {
+              "projectPath": "C:\\Users\\nagyz\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\ReceptekLibrary.csproj"
             }
           }
         }
@@ -4911,12 +4911,13 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "all"
+        "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "10.0.200"
     },
     "frameworks": {
       "net8.0": {
+        "framework": "net8.0",
         "targetAlias": "net8.0",
         "dependencies": {
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
@@ -4953,7 +4954,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
