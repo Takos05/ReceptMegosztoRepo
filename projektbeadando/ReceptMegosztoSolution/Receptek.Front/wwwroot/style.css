@@ -5,6 +5,7 @@
     --card: white;
 }
 
+
 body.dark {
     --bg: #121212;
     --text: #f1f1f1;
@@ -66,9 +67,9 @@ body {
 
 /* CONTENT */
 .container {
-    width: 90%;
-    margin: auto;
-    padding: 40px 0;
+    width: min98vw;
+    margin: 0 auto;
+    padding: 24px clamp(12px, 2vw, 32px);
 }
 
 /* HERO */
@@ -180,15 +181,16 @@ select {
 /* MENU */
 .menuBody {
     display: flex;
-    gap: 24px;
-    padding: 20px;
+    gap: clamp(16px, 2vw, 32px);
+    padding: clamp(12px, 2vw, 28px);
     min-height: 100vh;
     box-sizing: border-box;
     background-color: #f5f7fa;
+    width: calc(100vw - 24px);
 }
 
 .tagekSidebar {
-    width: 260px;
+    width: clamp(260px, 20vw, 340px);
     flex-shrink: 0;
     background: white;
     padding: 20px;
@@ -233,7 +235,7 @@ select {
 
 .menuTable {
     width: 100%;
-    table-layout: fixed;
+    table-layout: auto;
     border-collapse: separate;
     border-spacing: 12px;
 }
@@ -242,6 +244,7 @@ select {
     flex: 1;
     display: flex;
     flex-direction: column;
+    min-width: 0;
 }
 
 .menuTable thead th {
@@ -312,3 +315,30 @@ select {
         border-spacing: 8px;
     }
 }
+
+.day-chip {
+    cursor: pointer;
+    text-align: center;
+    padding: 8px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    border: 1px solid #dee2e6;
+    background-color: #f8f9fa;
+    transition: all 0.2s ease;
+    user-select: none;
+    color: crimson;
+}
+
+    .day-chip:hover {
+        background-color: #e9ecef;
+    }
+
+    .day-chip.selected {
+        background-color: #0d6efd;
+        color: white;
+        border-color: #0d6efd;
+    }
+
+        .day-chip.selected:hover {
+            background-color: #0b5ed7;
+        }

@@ -2,24 +2,43 @@
 @using ReceptekLibrary.MODELL
 @inject HttpClient httpClient
 @rendermode InteractiveServer
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <div class="menuBody">
     <div class="tagekSidebar">
 
         <button type="button" @onclick="menuCreate" class="menuButton">Menü készítése</button>
 
-        @foreach (var category in tagek)
+        @foreach (var category in tagek.OrderBy(c => c.Key))
         {
-            <h5>@category.Key</h5>
-            foreach (var tag in category.Value)
-            {
-                <input type="checkbox"
-                       id="@tag"
-                       checked="@selectedTags.Contains(tag)"
-                       @onchange="(ChangeEventArgs e) => ToggleTag(tag, (bool)e.Value)">
-                <label for="@tag">@tag</label>
-                <br>
-            }
+            var isCollapsed = IsCategoryCollapsed(category.Key);
+
+            <div class="mb-3 border rounded">
+                <button type="button"
+                class="btn w-100 text-start fw-bold"
+                @onclick="() => ToggleCategory(category.Key)">
+                    @(isCollapsed ? "►" : "▼") @category.Key
+                </button>
+
+                @if (!isCollapsed)
+                {
+                    <div class="p-3 pt-2">
+                        @foreach (var tag in category.Value.OrderBy(t => t))
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input"
+                                type="checkbox"
+                                id="@tag"
+                                checked="@selectedTags.Contains(tag)"
+                                @onchange="(ChangeEventArgs e) => ToggleTag(tag, Convert.ToBoolean(e.Value))" />
+                                <label class="form-check-label" for="@tag">@tag</label>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
         }
     </div>
 
@@ -27,27 +46,43 @@
         <table class="menuTable">
             <thead>
                 <tr>
-                    @foreach (var nap in hetNapjai)
+                    @for (int i = 0; i < hetNapjai.Length; i++)
                     {
-                        <th>@nap</th>
+                        var dayIndex = i;
+
+                        <th class="p-2">
+                            <button class="day-chip @(selectedDayIndexes.Contains(dayIndex) ? "selected" : "")"
+                                    @onclick="() => ToggleDay(dayIndex)">
+                                @hetNapjai[dayIndex]
+                            </button>
+                        </th>
                     }
                 </tr>
             </thead>
-            @if (isMenuCreated && menu.Count == hetNapjai.Length)
+            @if (isMenuCreated && menu.Count > 0)
             {
                 <tbody>
                     <tr>
+                        @{
+                            int menuIndex = 0;
+                        }
+
                         @for (int i = 0; i < hetNapjai.Length; i++)
                         {
                             <td>
-                                <div class="card mb-3">
-                                    <a href="@($"/receptek/{menu[i].recipe_id}")" class="text-decoration-none text-dark">
-                                        <div class="card-body">
-                                            <h5 class="card-title">@menu[i].title</h5>
-                                            <p class="card-text">@menu[i].description</p>
-                                        </div>
-                                    </a>
-                                </div>
+                                @if (selectedDayIndexes.Contains(i) && menuIndex < menu.Count)
+                                {
+                                    <div class="card mb-3">
+                                        <a href="@($"/receptek/{menu[i].recipe_id}")" class="text-decoration-none text-dark">
+                                            <div class="card-body">
+                                                <h5 class="card-title">@menu[i].title</h5>
+                                                <p class="card-text">@menu[i].description</p>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    menuIndex++;
+                                }
                             </td>
                         }
                     </tr>
@@ -62,6 +97,8 @@
 
     bool isMenuCreated = false;
     string[] hetNapjai = new string[] { "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombat", "Vasárnap" };
+    HashSet<int> selectedDayIndexes = new();
+    HashSet<string> collapsedCategories = new();
 
     Dictionary<string, string[]> tagek = new Dictionary<string, string[]>();
     List<Recipes> receptek = new();
@@ -69,6 +106,17 @@
     {
         receptek = await httpClient.GetFromJsonAsync<List<Recipes>>("/api/Recipe");
         tagek = await httpClient.GetFromJsonAsync<Dictionary<string, string[]>>("api/Tags/byCategories");
+        selectedDayIndexes = Enumerable.Range(0, hetNapjai.Length).ToHashSet();
+
+        await LoadUserDefaultTags();
+    }
+
+    void ToggleDay(int dayIndex)
+    {
+        if (selectedDayIndexes.Contains(dayIndex))
+            selectedDayIndexes.Remove(dayIndex);
+        else
+            selectedDayIndexes.Add(dayIndex);
     }
 
     // Tagek kiválasztása
@@ -86,12 +134,10 @@
 
     async Task menuCreate()
     {
-        Console.WriteLine("CLICKED!");
         menu.Clear();
 
         List<Recipes> usableRecipes;
 
-        // ✅ If no tags selected → use all recipes
         if (selectedTags.Count == 0)
         {
             usableRecipes = new List<Recipes>(receptek);
@@ -101,15 +147,16 @@
             usableRecipes = await FilterRecipesByTags();
         }
 
-        if (usableRecipes.Count < hetNapjai.Length)
+        if (usableRecipes.Count <= 0 || selectedDayIndexes.Count <= 0)
         {
             isMenuCreated = false;
             return;
         }
 
         var rnd = new Random();
+        int recipecount = Math.Min(usableRecipes.Count, hetNapjai.Length);
 
-        foreach (var nap in hetNapjai)
+        for (int i = 0; i < recipecount; i++)
         {
             var selectedRecipe = usableRecipes[rnd.Next(usableRecipes.Count)];
             menu.Add(selectedRecipe);
@@ -136,6 +183,53 @@
             }
         }
         return filteredRecipes;
+    }
+
+    void ToggleCategory(string categoryName)
+{
+    if (collapsedCategories.Contains(categoryName))
+        collapsedCategories.Remove(categoryName);
+    else
+        collapsedCategories.Add(categoryName);
+}
+
+    bool IsCategoryCollapsed(string categoryName)
+    {
+        return collapsedCategories.Contains(categoryName);
+    }
+
+    async Task LoadUserDefaultTags()
+    {
+        try
+        {
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+
+            if (user.Identity?.IsAuthenticated != true)
+                return;
+
+            var idClaim =
+                user.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value
+                ?? user.FindFirst("sub")?.Value;
+
+            if (!int.TryParse(idClaim, out int userId))
+                return;
+
+            var defaultTags = await httpClient.GetFromJsonAsync<List<Tags>>(
+                $"api/tags/UserDefaults?userId={userId}"
+            );
+
+            if (defaultTags == null)
+                return;
+
+            selectedTags = defaultTags
+                .Select(t => t.tag_name)
+                .ToList();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Default tagek betöltési hiba: {ex.Message}");
+        }
     }
 
 }

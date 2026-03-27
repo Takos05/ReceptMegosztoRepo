@@ -189,27 +189,13 @@ namespace Receptek.Front.Controllers
             return LocalRedirect(string.IsNullOrWhiteSpace(returnUrl) ? "/" : returnUrl);
         }
 
-
-        /// <summary>
-        /// Kijelentkezteti a felhasználót a Front alkalmazásból.
-        /// A cookie-alapú hitelesítéshez tartozó auth cookie törlésre kerül,
-        /// így a felhasználó a továbbiakban nem lesz bejelentkezett állapotban.
-        /// </summary>
-        [HttpPost("logout")]
-        public async Task<IActionResult> Logout()
+        [HttpPost("logout-form")]
+        public async Task<IActionResult> LogoutForm([FromForm] string? returnUrl)
         {
-            /// <summary>
-            /// Kijelentkezteti a felhasználót a Front alkalmazásból.
-            /// A cookie-alapú hitelesítéshez tartozó auth cookie törlésre kerül,
-            /// így a felhasználó a továbbiakban nem lesz bejelentkezett állapotban.
-            /// </summary>
             await HttpContext.SignOutAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme);
 
-            /// <summary>
-            /// Sikeres kijelentkezés után OK választ adunk vissza.
-            /// </summary>
-            return Ok();
+            return LocalRedirect(string.IsNullOrWhiteSpace(returnUrl) ? "/" : returnUrl);
         }
 
 

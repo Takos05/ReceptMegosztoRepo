@@ -133,15 +133,31 @@
   },
   {
     "ContainingType": "ReceptekApi.Controllers.RecipeController",
-    "Method": "CreateRecipe",
-    "RelativePath": "api/Recipe",
-    "HttpMethod": "POST",
+    "Method": "DeleteRecipe",
+    "RelativePath": "api/Recipe/{recipeId}",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "recipe",
-        "Type": "ReceptekLibrary.MODELL.Recipes",
+        "Name": "recipeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ReceptekApi.Controllers.RecipeController",
+    "Method": "GetRecipesByUser",
+    "RelativePath": "api/Recipe/byUser/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -181,22 +197,6 @@
   },
   {
     "ContainingType": "ReceptekApi.Controllers.RecipeController",
-    "Method": "DeleteRecipe",
-    "RelativePath": "api/Recipe/Recipes/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ReceptekApi.Controllers.RecipeController",
     "Method": "UpdateRecipe",
     "RelativePath": "api/Recipe/Recipes/{id}",
     "HttpMethod": "PUT",
@@ -211,6 +211,22 @@
       {
         "Name": "updatedRecipe",
         "Type": "ReceptekLibrary.MODELL.Recipes",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ReceptekApi.Controllers.RecipeController",
+    "Method": "CreateRecipeWithTags",
+    "RelativePath": "api/Recipe/withTags",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ReceptekApi.Controllers.RecipeController\u002BCreateRecipeWithTagsRequest",
         "IsRequired": true
       }
     ],
@@ -240,6 +256,16 @@
         "IsRequired": false
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ReceptekApi.Controllers.TagsController",
+    "Method": "GetAllTags",
+    "RelativePath": "api/Tags/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -280,6 +306,22 @@
         "Name": "userId",
         "Type": "System.Int32",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ReceptekApi.Controllers.TagsController",
+    "Method": "SaveUserDefaultTags",
+    "RelativePath": "api/Tags/UserDefaults",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ReceptekApi.Controllers.TagsController\u002BSaveUserDefaultTagsRequest",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

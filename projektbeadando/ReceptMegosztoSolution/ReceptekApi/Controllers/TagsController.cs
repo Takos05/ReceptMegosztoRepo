@@ -16,6 +16,17 @@ namespace ReceptekApi.Controllers
             _context = context;
         }
 
+        [HttpGet("all")]
+        public IActionResult GetAllTags()
+        {
+            var tags = _context.tags
+                .OrderBy(t => t.category_id)
+                .ThenBy(t => t.tag_name)
+                .ToList();
+
+            return Ok(tags);
+        }
+
         [HttpGet("byCategories")]
         public IActionResult GetTagsByCategories()
         {
@@ -54,19 +65,68 @@ namespace ReceptekApi.Controllers
         }
 
         [HttpGet("UserDefaults")]
-        public IActionResult GetUserDefaultTags(int userId)
+        public IActionResult GetUserDefaultTags([FromQuery] int userId)
         {
-            var tagIds = _context.user_Default_Tags.Where(t => t.user_id == userId).ToList();
-            var tags = new List<Tags>();
-            foreach (var tagId in tagIds)
+            if (userId <= 0)
             {
-                var tag = _context.tags.FirstOrDefault(t => t.tag_id == tagId.tag_id);
-                if (tag != null)
-                {
-                    tags.Add(tag);
-                }
+                return BadRequest("Érvénytelen userId.");
             }
+
+            var defaultTagIds = _context.user_Default_Tags
+                .Where(x => x.user_id == userId)
+                .Select(x => x.tag_id)
+                .ToList();
+
+            var tags = _context.tags
+                .Where(t => defaultTagIds.Contains(t.tag_id))
+                .OrderBy(t => t.category_id)
+                .ThenBy(t => t.tag_name)
+                .ToList();
+
             return Ok(tags);
+        }
+
+        [HttpPost("UserDefaults")]
+        public IActionResult SaveUserDefaultTags([FromBody] SaveUserDefaultTagsRequest request)
+        {
+            if (request == null || request.UserId <= 0)
+            {
+                return BadRequest("Érvénytelen kérés.");
+            }
+
+            var existing = _context.user_Default_Tags
+                .Where(x => x.user_id == request.UserId)
+                .ToList();
+
+            if (existing.Any())
+            {
+                _context.user_Default_Tags.RemoveRange(existing);
+            }
+
+            if (request.TagIds != null && request.TagIds.Any())
+            {
+                var newItems = request.TagIds
+                    .Distinct()
+                    .Select(tagId => new User_Default_Tags
+                    {
+                        user_id = request.UserId,
+                        tag_id = tagId
+                    })
+                    .ToList();
+
+                _context.user_Default_Tags.AddRange(newItems);
+            }
+
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
+
+        public class SaveUserDefaultTagsRequest
+        {
+            public int UserId { get; set; }
+            public List<int> TagIds { get; set; } = new();
         }
     }
 }

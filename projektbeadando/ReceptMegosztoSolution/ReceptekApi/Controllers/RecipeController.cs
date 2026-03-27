@@ -36,25 +36,78 @@ namespace ReceptekApi.Controllers
             return Ok(recipe);
         }
 
-        [HttpPost()]
-        public async Task<IActionResult> CreateRecipe(Recipes recipe)
+        [HttpPost("withTags")]
+        public async Task<IActionResult> CreateRecipeWithTags([FromBody] CreateRecipeWithTagsRequest request)
         {
+            if (request == null)
+            {
+                return BadRequest("Érvénytelen kérés.");
+            }
+
+            var recipe = new Recipes
+            {
+                user_id = request.user_id,
+                title = request.title,
+                description = request.description,
+                prep_time_min = request.prep_time_min,
+                cook_time_min = request.cook_time_min,
+                servings = request.servings,
+                created_at = DateTime.Now
+            };
+
             _context.Recipes.Add(recipe);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetRecipeById), new { id = recipe.recipe_id }, recipe);
+
+            if (request.tag_ids != null && request.tag_ids.Any())
+            {
+                var recipeTags = request.tag_ids
+                    .Distinct()
+                    .Select(tagId => new Recipe_Tags
+                    {
+                        recipe_id = recipe.recipe_id,
+                        tag_id = tagId
+                    })
+                    .ToList();
+
+                _context.recipe_Tags.AddRange(recipeTags);
+                await _context.SaveChangesAsync();
+            }
+
+            return Ok(recipe);
         }
 
-        [HttpDelete("Recipes/{id}")]
-        public async Task<IActionResult> DeleteRecipe(int id)
+        public class CreateRecipeWithTagsRequest
         {
-            var recipe = await _context.Recipes.FindAsync(id);
+            public int user_id { get; set; }
+            public string title { get; set; } = string.Empty;
+            public string description { get; set; } = string.Empty;
+            public int prep_time_min { get; set; }
+            public int cook_time_min { get; set; }
+            public int servings { get; set; }
+            public List<int> tag_ids { get; set; } = new();
+        }
+
+        [HttpDelete("{recipeId}")]
+        public IActionResult DeleteRecipe(int recipeId)
+        {
+            var recipe = _context.Recipes.FirstOrDefault(r => r.recipe_id == recipeId);
+
             if (recipe == null)
             {
-                return NotFound();
+                return NotFound("A recept nem található.");
             }
+
+            var recipeTags = _context.recipe_Tags.Where(rt => rt.recipe_id == recipeId).ToList();
+            if (recipeTags.Any())
+            {
+                _context.recipe_Tags.RemoveRange(recipeTags);
+            }
+
+
             _context.Recipes.Remove(recipe);
-            await _context.SaveChangesAsync();
-            return NoContent();
+            _context.SaveChanges();
+
+            return Ok();
         }
 
         [HttpPut("Recipes/{id}")]
@@ -84,6 +137,17 @@ namespace ReceptekApi.Controllers
         {
             var comments = await _context.comments.Where(c => c.recipe_id == recipeId).ToListAsync();
             return Ok(comments);
+        }
+
+        [HttpGet("byUser/{userId}")]
+        public IActionResult GetRecipesByUser(int userId)
+        {
+            var recipes = _context.Recipes
+                .Where(r => r.user_id == userId)
+                .OrderByDescending(r => r.recipe_id)
+                .ToList();
+
+            return Ok(recipes);
         }
     }
 }
