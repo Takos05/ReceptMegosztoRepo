@@ -96,7 +96,9 @@
             "description": "OK"
           }
         }
-      },
+      }
+    },
+    "/api/Comment/{commentId}": {
       "delete": {
         "tags": [
           "Comment"
@@ -104,7 +106,8 @@
         "parameters": [
           {
             "name": "commentId",
-            "in": "query",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -341,6 +344,44 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/SeedAdmin": {
+      "post": {
+        "tags": [
+          "SeedAdmin"
+        ],
+        "parameters": [
+          {
+            "name": "userName",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "admin"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "admin@local"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "Admin123!"
             }
           }
         ],

@@ -68,6 +68,55 @@ else
                 </div>
             }
         </div>
+        @if (isLoggedIn)
+        {
+            <div class="border rounded p-3 mt-3">
+                <div class="mb-2">
+                    <strong>Saját értékelés:</strong>
+                </div>
+
+                <!-- Kattintható csillagok -->
+                <div class="mb-3" style="font-size: 2rem;">
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        var starValue = i;
+                        <button type="button"
+                                class="btn btn-link p-0 me-1 text-decoration-none"
+                                style="font-size: 2rem; color: @(starValue <= selectedRating ? "gold" : "lightgray");"
+                                @onclick="() => SelectRating(starValue)">
+                            @(starValue <= selectedRating ? "★" : "☆")
+                        </button>
+                    }
+                </div>
+
+                <!-- Pillanatnyilagi értékelés -->
+                @if (currentUserRating != null)
+                {
+                    <p class="text-muted">
+                        Jelenlegi értékelésed: <strong>@currentUserRating.ratings_value / 5</strong>
+                    </p>
+                }
+
+                <!-- Mentés -->
+                <button class="btn btn-primary"
+                        @onclick="SaveRating"
+                        disabled="@ratingSubmitting">
+                    @(currentUserRating == null ? "Értékelés mentése" : "Értékelés módosítása")
+                </button>
+
+                <!-- Siker -->
+                @if (!string.IsNullOrWhiteSpace(ratingSuccessMessage))
+                {
+                    <div class="alert alert-success mt-2">
+                        @ratingSuccessMessage
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p class="text-muted">Értékeléshez jelentkezz be.</p>
+        }
     </div>
 
     <!-- Kommentek -->
@@ -115,9 +164,19 @@ else
                     @foreach (var comment in comments.OrderByDescending(c => c.created_at))
                     {
                         <div class="list-group-item">
-                            <div class="d-flex justify-content-between">
-                                <strong>@GetUserName(comment.user_id)</strong>
-                                <small>@comment.created_at.ToString("yyyy-MM-dd HH:mm")</small>
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <strong>@GetUserName(comment.user_id)</strong>
+                                    <small>@comment.created_at.ToString("yyyy-MM-dd HH:mm")</small>
+                                </div>
+
+                                @if (CanDeleteComment(comment))
+                                {
+                                    <button class="btn btn-sm btn-outline-danger"
+                                            @onclick="() => DeleteComment(comment.comment_id)">
+                                        Törlés
+                                    </button>
+                                }
                             </div>
                             <div class="mt-2">
                                 @comment.comment_text
@@ -158,6 +217,13 @@ else
     private bool isLoggedIn;
     private string? currentUserName;
     private int? currentUserId;
+    private bool isAdmin;
+
+    private Ratings? currentUserRating;
+    private double selectedRating = 0;
+
+    private bool ratingSubmitting = false;
+    private string? ratingSuccessMessage;
 
     protected override async Task OnInitializedAsync()
     {
@@ -175,7 +241,8 @@ else
             {
                 await LoadUsers();
                 await LoadRating();
-                await LoadComments();
+                await LoadComments(); 
+                await LoadCurrentUserRating();
             }
         }
         catch (Exception ex)
@@ -319,18 +386,18 @@ else
             currentUserId = parsedUserId;
         else
             currentUserId = null;
+
+        isAdmin =
+            currentUser.IsInRole("Admin") ||
+            currentUser.Claims.Any(c =>
+            (c.Type == ClaimTypes.Role || c.Type == "role" || c.Type == "roles") &&
+            c.Value == "Admin");
     }
     private async Task KommentKuldes()
     {
         if (!isLoggedIn)
         {
             commentsErrorMessage = "Komment írásához jelentkezz be.";
-            return;
-        }
-
-        if (currentUserId == null)
-        {
-            commentsErrorMessage = "A felhasználó azonosítója nem található a bejelentkezésben.";
             return;
         }
 
@@ -343,12 +410,12 @@ else
         commentsErrorMessage = null;
 
         var uj = new Comments
-        {
-            recipe_id = id,
-            user_id = currentUserId.Value,
-            comment_text = ujKomment.Trim(),
-            created_at = DateTime.Now
-        };
+            {
+                recipe_id = id,
+                user_id = currentUserId.Value,
+                comment_text = ujKomment.Trim(),
+                created_at = DateTime.Now,
+            };
 
         var response = await Http.PostAsJsonAsync("/api/Comment", uj);
 
@@ -364,4 +431,140 @@ else
         }
     }
 
+    private bool CanDeleteComment(Comments comment)
+    {
+        if (!isLoggedIn)
+            return false;
+
+        if (isAdmin)
+            return true;
+
+        return currentUserId != null && comment.user_id == currentUserId.Value;
+    }
+
+    private async Task DeleteComment(int commentId)
+    {
+        if (!isLoggedIn)
+        {
+            commentsErrorMessage = "Komment törléséhez jelentkezz be.";
+            return;
+        }
+
+        commentsErrorMessage = null;
+
+        var response = await Http.DeleteAsync($"/api/Comment/{commentId}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            await LoadComments();
+        }
+        else if (response.StatusCode == HttpStatusCode.Forbidden)
+        {
+            commentsErrorMessage = "Nincs jogosultságod a komment törléséhez.";
+        }
+        else
+        {
+            var body = await response.Content.ReadAsStringAsync();
+            commentsErrorMessage = $"Komment törlési hiba {(int)response.StatusCode}: {body}";
+        }
+    }
+
+    private async Task LoadCurrentUserRating()
+    {
+        if (!isLoggedIn || currentUserId == null)
+        {
+            currentUserRating = null;
+            selectedRating = 0;
+            return;
+        }
+
+        var response = await Http.GetAsync($"/api/Rating/userByRecipe?recipeId={id}&userId={currentUserId.Value}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            currentUserRating = await response.Content.ReadFromJsonAsync<Ratings>();
+
+            if (currentUserRating != null)
+            {
+                selectedRating = currentUserRating.ratings_value;
+            }
+        }
+        else
+        {
+            currentUserRating = null;
+            selectedRating = 0;
+        }
+    }
+
+    private void SelectRating(int value)
+    {
+        selectedRating = value;
+        ratingSuccessMessage = null;
+    }
+
+    private async Task SaveRating()
+    {
+        if (!isLoggedIn || currentUserId == null)
+        {
+            ratingErrorMessage = "Értékeléshez jelentkezz be.";
+            return;
+        }
+
+        if (selectedRating < 1 || selectedRating > 5)
+        {
+            ratingErrorMessage = "Válassz 1 és 5 csillag között.";
+            return;
+        }
+
+        ratingSubmitting = true;
+        ratingErrorMessage = null;
+        ratingSuccessMessage = null;
+
+        try
+        {
+            if (currentUserRating == null)
+            {
+                var newRating = new Ratings
+                    {
+                        recipe_id = id,
+                        user_id = currentUserId.Value,
+                        ratings_value = selectedRating,
+                        created_at = DateTime.Now
+                    };
+
+                var response = await Http.PostAsJsonAsync("/api/Rating", newRating);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    ratingErrorMessage = "Mentési hiba.";
+                    return;
+                }
+
+                ratingSuccessMessage = "Értékelés mentve.";
+            }
+            else
+            {
+                currentUserRating.ratings_value = selectedRating;
+
+                var response = await Http.PutAsJsonAsync(
+                    $"/api/Rating/{currentUserRating.rating_id}",
+                    currentUserRating);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    ratingErrorMessage = "Módosítási hiba.";
+                    return;
+                }
+
+                ratingSuccessMessage = "Értékelés frissítve.";
+            }
+
+            await LoadCurrentUserRating();
+            await LoadRating();
+        }
+        finally
+        {
+            ratingSubmitting = false;
+        }
+    }
 }

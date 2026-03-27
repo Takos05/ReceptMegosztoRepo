@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ReceptekLibrary.DATA;
 using ReceptekLibrary.MODELL;
+using System.Security.Claims;
 
 namespace ReceptekApi.Controllers
 {
@@ -24,16 +26,19 @@ namespace ReceptekApi.Controllers
             return Ok();
         }
 
-        [HttpDelete]
+        [HttpDelete("{commentId}")]
         public async Task<IActionResult> DeleteComment(int commentId)
         {
             var comment = await _context.comments.FindAsync(commentId);
+
             if (comment == null)
             {
                 return NotFound();
             }
+
             _context.comments.Remove(comment);
             await _context.SaveChangesAsync();
+
             return Ok();
         }
     }

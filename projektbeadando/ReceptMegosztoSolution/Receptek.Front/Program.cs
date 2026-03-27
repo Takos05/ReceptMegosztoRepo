@@ -13,13 +13,13 @@ builder.Services.AddControllers(); // Ez a szolgáltatás teszi lehetővé, hogy
 // Nevesített HttpClient szolgáltatás hozzáadása, amelyet a helyi Controller hív.
 builder.Services.AddHttpClient("api", client =>
 {
-    client.BaseAddress = new Uri("http://localhost:44319/");
+    client.BaseAddress = new Uri("https://localhost:44319/");
 });
 
 // Megmarad a razor oldalaknak.
 builder.Services.AddScoped(sp => new HttpClient
 {
-    BaseAddress = new Uri("http://localhost:44319/"),
+    BaseAddress = new Uri("https://localhost:44319/"),
     Timeout = TimeSpan.FromSeconds(30) // Ne várjon túl sokáig a válaszra
 });
 

@@ -30,6 +30,30 @@ public class AuthController : ControllerBase
         _context.users.Add(user);
         await _context.SaveChangesAsync();
 
+        var userRoleEntity = await _context.roles
+            .FirstOrDefaultAsync(r => r.name == "User");
+
+        if (userRoleEntity == null)
+        {
+            userRoleEntity = new Roles
+            {
+                name = "User"
+            };
+
+            _context.roles.Add(userRoleEntity);
+            await _context.SaveChangesAsync();
+        }
+
+        // kapcsolat létrehozása
+        var userRole = new UserRole
+        {
+            user_id = user.user_id,
+            role_id = userRoleEntity.role_id,
+        };
+
+        _context.userRole.Add(userRole);
+        await _context.SaveChangesAsync();
+
         return Ok();
     }
 
@@ -44,7 +68,12 @@ public class AuthController : ControllerBase
         if (user == null)
             return Unauthorized("Sikertelen bejelentkezés");
 
-        var roles = new List<string> { "User" };
+        var roles = await (
+        from ur in _context.userRole
+        join r in _context.roles on ur.role_id equals r.role_id
+        where ur.user_id == user.user_id
+        select r.name
+        ).ToListAsync();
 
         var token = _jwt.CreateToken(user, roles);
 

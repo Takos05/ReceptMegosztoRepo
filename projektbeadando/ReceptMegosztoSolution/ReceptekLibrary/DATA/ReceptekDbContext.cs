@@ -22,5 +22,7 @@ namespace ReceptekLibrary.DATA
         public DbSet<Users> users { get; set; }
         public DbSet<Ratings> Ratings { get; set; }
         public DbSet<Comments> comments { get; set; }
+        public DbSet<UserRole> userRole { get; set; }
+        public DbSet<Roles> roles { get; set; }
     }
 }

@@ -50,7 +50,7 @@
   {
     "ContainingType": "ReceptekApi.Controllers.CommentController",
     "Method": "DeleteComment",
-    "RelativePath": "api/Comment",
+    "RelativePath": "api/Comment/{commentId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -58,7 +58,7 @@
       {
         "Name": "commentId",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -212,6 +212,32 @@
         "Name": "updatedRecipe",
         "Type": "ReceptekLibrary.MODELL.Recipes",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ReceptekApi.Controllers.SeedAdminController",
+    "Method": "Post",
+    "RelativePath": "api/SeedAdmin",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "password",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
