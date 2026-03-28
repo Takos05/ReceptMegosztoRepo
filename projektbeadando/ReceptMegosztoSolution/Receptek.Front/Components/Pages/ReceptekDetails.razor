@@ -8,7 +8,6 @@
 @inject AuthenticationStateProvider AuthStateProvider
 @using System.Security.Claims
 
-<h3>Recept részletei</h3>
 
 @if (!string.IsNullOrEmpty(errorMessage))
 {
@@ -120,9 +119,12 @@ else
     </div>
 
     <!-- Kommentek -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h4 class="card-title">Kommentek</h4>
+    <div class="mt-4">
     @if (isLoggedIn)
     {
-        <div class="mt-4">
             <h5>Írj kommentet</h5>
 
             <textarea class="form-control"
@@ -133,7 +135,7 @@ else
             <button class="btn btn-primary mt-2" @onclick="KommentKuldes">
                 Küldés
             </button>
-        </div>
+        
     }
     else
     {
@@ -141,10 +143,8 @@ else
             Komment írásához jelentkezz be.
         </p>
     }
-
-    <div class="card mb-4">
-        <div class="card-body">
-            <h4 class="card-title">Kommentek</h4>
+        </div>
+    
 
             @if (commentsLoading)
             {

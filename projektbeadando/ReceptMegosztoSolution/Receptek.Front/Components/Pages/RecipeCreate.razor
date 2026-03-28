@@ -11,7 +11,7 @@
 
 <PageTitle>Új recept</PageTitle>
 
-<h3>Új recept készítése</h3>
+
 
 @if (isLoading)
 {
@@ -103,7 +103,7 @@ else
                                                    type="checkbox"
                                                    id="tag_@tagId"
                                                    checked="@selectedTagIds.Contains(tagId)"
-                                                   @onchange="(e => OnTagChanged(tagId, e))" />
+                                                   @onclick="() => ToggleTag(tagId)" />
                                             <label class="form-check-label" for="tag_@tagId">
                                                 @tagName
                                             </label>
@@ -194,20 +194,18 @@ else
         }
     }
 
-
-    private void OnTagChanged(int tagId, ChangeEventArgs e)
+    private void ToggleTag(int tagId)
     {
-        var isChecked = e.Value?.ToString() == "true";
-
-        if (isChecked)
-        {
-            selectedTagIds.Add(tagId);
-        }
-        else
+        if (selectedTagIds.Contains(tagId))
         {
             selectedTagIds.Remove(tagId);
         }
+        else
+        {
+            selectedTagIds.Add(tagId);
+        }
     }
+   
 
     private async Task CreateRecipe()
     {
@@ -248,7 +246,7 @@ else
                     return;
                 }
 
-                Navigation.NavigateTo("/profile");
+                Navigation.NavigateTo("/profile", forceLoad: true);
             }
             else
             {

@@ -4871,11 +4871,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\nagyz\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekApi\\ReceptekApi.csproj",
+      "projectUniqueName": "C:\\Users\\nagyz\\source\\repos\\ReceptMegosztoRepo\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekApi\\ReceptekApi.csproj",
       "projectName": "ReceptekApi",
-      "projectPath": "C:\\Users\\nagyz\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekApi\\ReceptekApi.csproj",
+      "projectPath": "C:\\Users\\nagyz\\source\\repos\\ReceptMegosztoRepo\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekApi\\ReceptekApi.csproj",
       "packagesPath": "C:\\Users\\nagyz\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\nagyz\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekApi\\obj\\",
+      "outputPath": "C:\\Users\\nagyz\\source\\repos\\ReceptMegosztoRepo\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4897,8 +4897,8 @@
           "framework": "net8.0",
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\nagyz\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\ReceptekLibrary.csproj": {
-              "projectPath": "C:\\Users\\nagyz\\source\\repos\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\ReceptekLibrary.csproj"
+            "C:\\Users\\nagyz\\source\\repos\\ReceptMegosztoRepo\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\ReceptekLibrary.csproj": {
+              "projectPath": "C:\\Users\\nagyz\\source\\repos\\ReceptMegosztoRepo\\ReceptMegosztoRepo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\ReceptekLibrary.csproj"
             }
           }
         }

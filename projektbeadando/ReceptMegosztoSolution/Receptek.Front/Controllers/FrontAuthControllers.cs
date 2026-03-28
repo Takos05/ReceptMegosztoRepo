@@ -150,14 +150,14 @@ namespace Receptek.Front.Controllers
 
             if (!response.IsSuccessStatusCode)
             {
-                return Redirect($"/login?error=1");
+                return Redirect($"{returnUrl}?error=1");
             }
 
             var loginResult = await response.Content.ReadFromJsonAsync<LoginResponse>();
 
             if (loginResult == null || string.IsNullOrWhiteSpace(loginResult.token))
             {
-                return Redirect($"/login?error=1");
+                return Redirect($"{returnUrl}?error=1");
             }
 
             var handler = new JwtSecurityTokenHandler();

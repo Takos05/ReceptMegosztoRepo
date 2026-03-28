@@ -1,4 +1,4 @@
-﻿// Fájl helye: ReceptekApi/Controllers/SeedAdminController.cs
+﻿
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +23,6 @@ namespace ReceptekApi.Controllers
             _environment = environment;
         }
 
-        // POST /api/SeedAdmin?userName=admin&email=admin@local&password=Admin123!
         [HttpPost]
         public async Task<IActionResult> Post(
             [FromQuery] string userName = "admin",

@@ -101,6 +101,19 @@ namespace ReceptekApi.Controllers
             if (recipeTags.Any())
             {
                 _context.recipe_Tags.RemoveRange(recipeTags);
+                _context.SaveChanges();
+            }
+            var comments = _context.comments.Where(rt => rt.recipe_id == recipeId).ToList();
+            if (comments.Any())
+            {
+                _context.comments.RemoveRange(comments);
+                _context.SaveChanges();
+            }
+            var ratings = _context.Ratings.Where(rt => rt.recipe_id == recipeId).ToList();
+            if (ratings.Any())
+            {
+                _context.Ratings.RemoveRange(ratings);
+                _context.SaveChanges();
             }
 
 

@@ -67,7 +67,7 @@ body {
 
 /* CONTENT */
 .container {
-    width: min98vw;
+    width: 96%;
     margin: 0 auto;
     padding: 24px clamp(12px, 2vw, 32px);
 }
@@ -178,6 +178,17 @@ select {
     padding: 6px;
 }
 
+.card {
+    max-height: 100%;
+    border: none;
+    border-radius: 14px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    transition: 0.25s ease;
+    width: 100%;
+}
+
 /* MENU */
 .menuBody {
     display: flex;
@@ -186,11 +197,11 @@ select {
     min-height: 100vh;
     box-sizing: border-box;
     background-color: #f5f7fa;
-    width: calc(100vw - 24px);
+    width: 100%;
 }
 
 .tagekSidebar {
-    width: clamp(260px, 20vw, 340px);
+    width: clamp(260px, 16vw, 280px);
     flex-shrink: 0;
     background: white;
     padding: 20px;
@@ -235,16 +246,17 @@ select {
 
 .menuTable {
     width: 100%;
-    table-layout: auto;
+    table-layout: fixed;
     border-collapse: separate;
     border-spacing: 12px;
 }
 
 .menuTableDiv {
-    flex: 1;
+    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     min-width: 0;
+    width: 100%;
 }
 
 .menuTable thead th {
@@ -262,16 +274,24 @@ select {
 
 .menuTable td {
     vertical-align: top;
+    height: 100%;
 }
 
-.card {
-    height: 100%;
+    .menuTable td > div {
+        height: 100%;
+    }
+
+.menucard {
+    flex-direction: column;
+    display: flex;
+    max-height: 100%;
     border: none;
     border-radius: 14px;
     overflow: hidden;
     background: white;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
     transition: 0.25s ease;
+    width: 100%;
 }
 
     .card:hover {
@@ -281,6 +301,9 @@ select {
 
 .card-body {
     padding: 15px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .card img {
