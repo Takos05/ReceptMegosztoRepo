@@ -34,90 +34,85 @@ else
                 </div>
 
                 <div class="row">
+
                     <div class="col-md-4 mb-3">
                         <label>Előkészítési idő</label>
                         <InputNumber class="form-control" @bind-Value="model.PrepTimeMin" />
                     </div>
+
                     <div class="col-md-4 mb-3">
                         <label>Főzési idő</label>
                         <InputNumber class="form-control" @bind-Value="model.CookTimeMin" />
                     </div>
+
                     <div class="col-md-4 mb-3">
                         <label>Adag</label>
                         <InputNumber class="form-control" @bind-Value="model.Servings" />
                     </div>
+
                 </div>
 
                 <hr />
 
                 <h5>Tagek</h5>
 
-                <div class="mb-3">
-                    <label>Új tag kiválasztása</label>
-                    <select class="form-select bg-light text-dark" @bind="selectedTagId">
-                        <option value="0">-- Válassz taget --</option>
-                        @foreach (var t in allTags)
-                        {
-                            <option value="@t.tag_id" disabled="@tags.Contains(t.tag_id)">@t.name</option>
-                        }
-                    </select>
+<div style="background:white; color:black; padding:15px; border-radius:6px; max-height:400px; overflow:auto;">
 
-                    <button class="btn btn-sm btn-primary mt-2" type="button" @onclick="AddTag">
-                        Tag hozzáadása
-                    </button>
-                </div>
+@foreach (var category in allTags.GroupBy(t => t.category))
+{
+    <div class="mb-3">
 
-                <div class="mb-3 d-flex flex-wrap">
-                    @foreach (var tagId in tags)
-                    {
-                        var tagName = allTags.FirstOrDefault(t => t.tag_id == tagId)?.name ?? tagId.ToString();
-                        <div class="tag-chip me-2 mb-2 d-flex align-items-center">
-                            <span>@tagName</span>
-                            <span class="tag-remove ms-2" @onclick="() => RemoveTag(tagId)">✖</span>
-                        </div>
-                    }
-                </div>
+        <b style="color:black;">Kategória @category.Key</b>
 
-                <button class="btn btn-success" disabled="@isSaving">Mentés</button>
-                <a class="btn btn-secondary ms-2" href="/profile">Mégse</a>
+        @foreach (var tag in category)
+        {
+            <div class="form-check">
+
+                <input type="checkbox"
+                       class="form-check-input"
+                       checked="@tag_ids.Contains(tag.tag_id)"
+                       @onchange="() => ToggleTag(tag.tag_id)" />
+
+                <label class="form-check-label" style="color:black; font-weight:500;">
+                    @tag.name
+                </label>
+
+            </div>
+        }
+
+    </div>
+}
+
+</div>
+
+                <button class="btn btn-success mt-3" disabled="@isSaving">
+                    Mentés
+                </button>
+
+                <a class="btn btn-secondary ms-2 mt-3" href="/profile">
+                    Mégse
+                </a>
+
             </EditForm>
 
         </div>
     </div>
 }
 
-<style>
-    .tag-chip {
-        background-color: #6c757d; /* szürke */
-        color: white;
-        border-radius: 20px;
-        padding: 0.25rem 0.75rem;
-        font-size: 0.875rem;
-    }
-
-        .tag-chip .tag-remove {
-            color: #ff4d4f; /* piros X */
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-            .tag-chip .tag-remove:hover {
-                color: #ff0000;
-            }
-</style>
-
 @code {
 
-    [Parameter] public int id { get; set; }
+    [Parameter]
+    public int id { get; set; }
 
     private bool isLoading = true;
     private bool isSaving = false;
 
     private RecipeEditModel model = new();
-    private List<int> tags = new();
-    private List<TagOption> allTags = new();
 
-    private int selectedTagId = 0;
+    private List<Tag> allTags = new();
+    private List<int> tag_ids = new();
+
+    private HashSet<string> collapsedCategories = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -128,12 +123,13 @@ else
 
     private async Task LoadAllTags()
     {
-        allTags = await Http.GetFromJsonAsync<List<TagOption>>("api/Recipe/allTags");
+        allTags = await Http.GetFromJsonAsync<List<Tag>>("api/tags/all");
     }
 
     private async Task LoadRecipe()
     {
         var recipe = await Http.GetFromJsonAsync<SharedModels.Recipes>($"api/Recipe/Recipes/{id}");
+
         if (recipe != null)
         {
             model.Title = recipe.title;
@@ -144,24 +140,40 @@ else
         }
 
         var recipeTags = await Http.GetFromJsonAsync<List<int>>($"api/Recipe/{id}/tags");
+
         if (recipeTags != null)
         {
-            tags = recipeTags;
+            tag_ids = recipeTags;
         }
     }
 
-    private void AddTag()
+    private void ToggleTag(int tagId)
     {
-        if (selectedTagId != 0 && !tags.Contains(selectedTagId))
+        if (tag_ids.Contains(tagId))
         {
-            tags.Add(selectedTagId);
-            selectedTagId = 0; // visszaállítja a "-- Válassz taget --" opcióra
+            tag_ids.Remove(tagId);
+        }
+        else
+        {
+            tag_ids.Add(tagId);
         }
     }
 
-    private void RemoveTag(int tagId)
+    private void ToggleCategory(string categoryName)
     {
-        tags.Remove(tagId);
+        if (collapsedCategories.Contains(categoryName))
+        {
+            collapsedCategories.Remove(categoryName);
+        }
+        else
+        {
+            collapsedCategories.Add(categoryName);
+        }
+    }
+
+    private bool IsCategoryCollapsed(string categoryName)
+    {
+        return collapsedCategories.Contains(categoryName);
     }
 
     private async Task UpdateRecipe()
@@ -182,7 +194,7 @@ else
 
         if (response.IsSuccessStatusCode)
         {
-            await Http.PutAsJsonAsync($"api/Recipe/{id}/tags", tags);
+            await Http.PutAsJsonAsync($"api/Recipe/{id}/tags", tag_ids);
             Navigation.NavigateTo($"/receptek/{id}");
         }
 
@@ -191,16 +203,26 @@ else
 
     private class RecipeEditModel
     {
-        [Required] public string Title { get; set; } = "";
-        [Required] public string Description { get; set; } = "";
+
+        [Required]
+        public string Title { get; set; } = "";
+
+        [Required]
+        public string Description { get; set; } = "";
+
         public int PrepTimeMin { get; set; }
+
         public int CookTimeMin { get; set; }
+
         public int Servings { get; set; }
+
     }
 
-    private class TagOption
+    private class Tag
     {
         public int tag_id { get; set; }
         public string name { get; set; } = "";
+        public string category { get; set; } = "";
     }
+
 }
