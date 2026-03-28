@@ -149,6 +149,53 @@
   },
   {
     "ContainingType": "ReceptekApi.Controllers.RecipeController",
+    "Method": "GetTagsForRecipe",
+    "RelativePath": "api/Recipe/{recipeId}/tags",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "recipeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ReceptekApi.Controllers.RecipeController",
+    "Method": "UpdateTags",
+    "RelativePath": "api/Recipe/{recipeId}/tags",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "recipeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "tagIds",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ReceptekApi.Controllers.RecipeController",
+    "Method": "GetAllTags",
+    "RelativePath": "api/Recipe/allTags",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ReceptekApi.Controllers.RecipeController",
     "Method": "GetRecipesByUser",
     "RelativePath": "api/Recipe/byUser/{userId}",
     "HttpMethod": "GET",

@@ -129,10 +129,10 @@ else
                                     Megnyitás
                                 </a>
 
-                                <button class="btn btn-outline-secondary btn-sm"
-                                        @onclick="() => EditRecipe(recipe.recipe_id)">
+                                <a class="btn btn-warning"
+                                       href="/recipeedit/@recipe.recipe_id">
                                     Szerkesztés
-                                </button>
+                                </a>
 
                                 <button class="btn btn-outline-danger btn-sm"
                                         @onclick="() => DeleteRecipe(recipe.recipe_id)">

@@ -1,6 +1,206 @@
 ﻿@page "/recipeedit/{id:int}"
-<h3>RecipeEdit</h3>
+@using System.ComponentModel.DataAnnotations
+@using System.Net.Http.Json
+@using SharedModels = ReceptekLibrary.MODELL
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+
+<PageTitle>Recept szerkesztése</PageTitle>
+
+<h3>Recept szerkesztése</h3>
+
+@if (isLoading)
+{
+    <p>Betöltés...</p>
+}
+else
+{
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <EditForm Model="model" OnValidSubmit="UpdateRecipe">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+
+                <div class="mb-3">
+                    <label class="form-label">Cím</label>
+                    <InputText class="form-control" @bind-Value="model.Title" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Leírás</label>
+                    <InputTextArea class="form-control" rows="6" @bind-Value="model.Description" />
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label>Előkészítési idő</label>
+                        <InputNumber class="form-control" @bind-Value="model.PrepTimeMin" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>Főzési idő</label>
+                        <InputNumber class="form-control" @bind-Value="model.CookTimeMin" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>Adag</label>
+                        <InputNumber class="form-control" @bind-Value="model.Servings" />
+                    </div>
+                </div>
+
+                <hr />
+
+                <h5>Tagek</h5>
+
+                <div class="mb-3">
+                    <label>Új tag kiválasztása</label>
+                    <select class="form-select bg-light text-dark" @bind="selectedTagId">
+                        <option value="0">-- Válassz taget --</option>
+                        @foreach (var t in allTags)
+                        {
+                            <option value="@t.tag_id" disabled="@tags.Contains(t.tag_id)">@t.name</option>
+                        }
+                    </select>
+
+                    <button class="btn btn-sm btn-primary mt-2" type="button" @onclick="AddTag">
+                        Tag hozzáadása
+                    </button>
+                </div>
+
+                <div class="mb-3 d-flex flex-wrap">
+                    @foreach (var tagId in tags)
+                    {
+                        var tagName = allTags.FirstOrDefault(t => t.tag_id == tagId)?.name ?? tagId.ToString();
+                        <div class="tag-chip me-2 mb-2 d-flex align-items-center">
+                            <span>@tagName</span>
+                            <span class="tag-remove ms-2" @onclick="() => RemoveTag(tagId)">✖</span>
+                        </div>
+                    }
+                </div>
+
+                <button class="btn btn-success" disabled="@isSaving">Mentés</button>
+                <a class="btn btn-secondary ms-2" href="/profile">Mégse</a>
+            </EditForm>
+
+        </div>
+    </div>
+}
+
+<style>
+    .tag-chip {
+        background-color: #6c757d; /* szürke */
+        color: white;
+        border-radius: 20px;
+        padding: 0.25rem 0.75rem;
+        font-size: 0.875rem;
+    }
+
+        .tag-chip .tag-remove {
+            color: #ff4d4f; /* piros X */
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+            .tag-chip .tag-remove:hover {
+                color: #ff0000;
+            }
+</style>
 
 @code {
 
+    [Parameter] public int id { get; set; }
+
+    private bool isLoading = true;
+    private bool isSaving = false;
+
+    private RecipeEditModel model = new();
+    private List<int> tags = new();
+    private List<TagOption> allTags = new();
+
+    private int selectedTagId = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadAllTags();
+        await LoadRecipe();
+        isLoading = false;
+    }
+
+    private async Task LoadAllTags()
+    {
+        allTags = await Http.GetFromJsonAsync<List<TagOption>>("api/Recipe/allTags");
+    }
+
+    private async Task LoadRecipe()
+    {
+        var recipe = await Http.GetFromJsonAsync<SharedModels.Recipes>($"api/Recipe/Recipes/{id}");
+        if (recipe != null)
+        {
+            model.Title = recipe.title;
+            model.Description = recipe.description;
+            model.PrepTimeMin = recipe.prep_time_min;
+            model.CookTimeMin = recipe.cook_time_min;
+            model.Servings = recipe.servings;
+        }
+
+        var recipeTags = await Http.GetFromJsonAsync<List<int>>($"api/Recipe/{id}/tags");
+        if (recipeTags != null)
+        {
+            tags = recipeTags;
+        }
+    }
+
+    private void AddTag()
+    {
+        if (selectedTagId != 0 && !tags.Contains(selectedTagId))
+        {
+            tags.Add(selectedTagId);
+            selectedTagId = 0; // visszaállítja a "-- Válassz taget --" opcióra
+        }
+    }
+
+    private void RemoveTag(int tagId)
+    {
+        tags.Remove(tagId);
+    }
+
+    private async Task UpdateRecipe()
+    {
+        isSaving = true;
+
+        var updatedRecipe = new SharedModels.Recipes
+        {
+            recipe_id = id,
+            title = model.Title,
+            description = model.Description,
+            prep_time_min = model.PrepTimeMin,
+            cook_time_min = model.CookTimeMin,
+            servings = model.Servings
+        };
+
+        var response = await Http.PutAsJsonAsync($"api/Recipe/Recipes/{id}", updatedRecipe);
+
+        if (response.IsSuccessStatusCode)
+        {
+            await Http.PutAsJsonAsync($"api/Recipe/{id}/tags", tags);
+            Navigation.NavigateTo($"/receptek/{id}");
+        }
+
+        isSaving = false;
+    }
+
+    private class RecipeEditModel
+    {
+        [Required] public string Title { get; set; } = "";
+        [Required] public string Description { get; set; } = "";
+        public int PrepTimeMin { get; set; }
+        public int CookTimeMin { get; set; }
+        public int Servings { get; set; }
+    }
+
+    private class TagOption
+    {
+        public int tag_id { get; set; }
+        public string name { get; set; } = "";
+    }
 }

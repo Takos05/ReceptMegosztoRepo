@@ -149,5 +149,44 @@ namespace ReceptekApi.Controllers
 
             return Ok(recipes);
         }
+        [HttpGet("{recipeId}/tags")]
+        public IActionResult GetTagsForRecipe(int recipeId)
+        {
+            var tags = _context.recipe_Tags
+                .Where(rt => rt.recipe_id == recipeId)
+                .Select(rt => rt.tag_id)
+                .ToList();
+
+            return Ok(tags);
+        }
+        [HttpPut("{recipeId}/tags")]
+        public async Task<IActionResult> UpdateTags(int recipeId, [FromBody] List<int> tagIds)
+        {
+            var existingTags = _context.recipe_Tags.Where(rt => rt.recipe_id == recipeId);
+            _context.recipe_Tags.RemoveRange(existingTags);
+
+            if (tagIds != null && tagIds.Any())
+            {
+                var newTags = tagIds.Select(tagId => new Recipe_Tags
+                {
+                    recipe_id = recipeId,
+                    tag_id = tagId
+                });
+
+                _context.recipe_Tags.AddRange(newTags);
+            }
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+        [HttpGet("allTags")]
+        public IActionResult GetAllTags()
+        {
+            var allTags = _context.tags
+                .Select(t => new { t.tag_id, t.tag_name })
+                .ToList();
+            return Ok(allTags);
+        }
     }
 }
