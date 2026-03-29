@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\akos\\Desktop\\Repos\\FoodShare\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\ReceptekLibrary.csproj": {}
+    "C:\\Users\\akos\\Desktop\\repo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\ReceptekLibrary.csproj": {}
   },
   "projects": {
-    "C:\\Users\\akos\\Desktop\\Repos\\FoodShare\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\ReceptekLibrary.csproj": {
+    "C:\\Users\\akos\\Desktop\\repo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\ReceptekLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\akos\\Desktop\\Repos\\FoodShare\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\ReceptekLibrary.csproj",
+        "projectUniqueName": "C:\\Users\\akos\\Desktop\\repo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\ReceptekLibrary.csproj",
         "projectName": "ReceptekLibrary",
-        "projectPath": "C:\\Users\\akos\\Desktop\\Repos\\FoodShare\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\ReceptekLibrary.csproj",
+        "projectPath": "C:\\Users\\akos\\Desktop\\repo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\ReceptekLibrary.csproj",
         "packagesPath": "C:\\Users\\akos\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\akos\\Desktop\\Repos\\FoodShare\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\obj\\",
+        "outputPath": "C:\\Users\\akos\\Desktop\\repo\\projektbeadando\\ReceptMegosztoSolution\\ReceptekLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
