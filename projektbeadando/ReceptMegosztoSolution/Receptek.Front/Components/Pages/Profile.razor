@@ -18,7 +18,7 @@
 }
 else if (!isAuthenticated)
 {
-    <div class="row g-4 profile-aut-layout">
+    <div class="row g-4 profile-auth-layout">
         <div class="col-12 col-lg-6">
             <div class="card shadow-sm h-100">
                 <div class="card-body">
@@ -88,18 +88,23 @@ else if (!isAuthenticated)
 }
 else
 {
-    <div class="card p-4">
+    <div class="card p-3 p-md-4 profile-card">
         <h4>@currentUserName</h4>
 
         <p><strong>Email:</strong> @currentUserEmail</p>
 
         <hr />
 
+        <form method="post" action="/auth/logout-form">
+            <input type="hidden" name="returnUrl" value="/profile" />
+            <button type="submit" class="btn btn-outline-danger">Kijelentkezés</button>
+        </form>
+
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-3">
             <h5 class="mb-0">Saját receptjeim</h5>
-            <a href="@($"/recipecreate")" class="text-decoration-none text-dark">
+            <a href="/recipecreate" class="btn btn-primary">
                 Új recept készítése
-                </a>
+            </a>
         </div>
 
         @if (!string.IsNullOrWhiteSpace(recipesMessage))
@@ -117,40 +122,38 @@ else
                 @foreach (var recipe in userRecipes)
                 {
                     <div class="list-group-item">
-                        <div class="d-flex justify-content-between align-items-center gap-3 flex-wrap">
-                            <a href="@($"/receptek/{recipe.recipe_id}")"
-                               class="text-decoration-none fw-semibold">
-                                @recipe.title
+                        <div class="d-flex flex-column flex-sm-row gap-2">
+                            <p class="mb-1"><strong>@recipe.title</strong></p>
+                            <a class="btn btn-outline-primary btn-sm"
+                               href="@($"/receptek/{recipe.recipe_id}")">
+                                Megnyitás
                             </a>
 
-                            <div class="d-flex gap-2 flex-column flex-sm-row">
-                                <a class="btn btn-outline-primary btn-sm"
-                                   href="@($"/receptek/{recipe.recipe_id}")">
-                                    Megnyitás
-                                </a>
+                            <a class="btn btn-warning btn-sm"
+                               href="@($"/recipeedit/{recipe.recipe_id}")">
+                                Szerkesztés
+                            </a>
 
-                                <a class="btn btn-warning"
-                                       href="/recipeedit/@recipe.recipe_id">
-                                    Szerkesztés
-                                </a>
-
-                                <button class="btn btn-outline-danger btn-sm"
-                                        @onclick="() => DeleteRecipe(recipe.recipe_id)">
-                                    Törlés
-                                </button>
-                            </div>
+                            <button class="btn btn-outline-danger btn-sm"
+                                    @onclick="() => DeleteRecipe(recipe.recipe_id)">
+                                Törlés
+                            </button>
                         </div>
                     </div>
                 }
             </div>
         }
 
-        <h5>Alapértelmezett tagek</h5>
+        <h5 class="mt-4">Alapértelmezett tagek</h5>
 
         @if (!string.IsNullOrWhiteSpace(tagsMessage))
         {
             <p>@tagsMessage</p>
         }
+
+        <button class="btn btn-primary w-100 w-md-auto" @onclick="SaveUserDefaultTags" disabled="@isSavingTags">
+            @(isSavingTags ? "Mentés..." : "Default tagek mentése")
+        </button>
 
         @if (tagsByCategory.Count == 0)
         {
@@ -174,19 +177,17 @@ else
                         <div class="p-3 pt-2">
                             @foreach (var tagName in category.Value.OrderBy(t => t))
                             {
-                                if (!tagNameToId.ContainsKey(tagName))
+                                if (!tagNameToId.TryGetValue(tagName, out var tagId))
                                 {
                                     continue;
                                 }
-
-                                var tagId = tagNameToId[tagName];
 
                                 <div class="form-check">
                                     <input class="form-check-input"
                                            type="checkbox"
                                            id="tag_@tagId"
-                                           checked="@selectedTagIds.Contains(tagId)"
-                                           @onchange="(e => OnTagChanged(tagId, e))" />
+                                           checked="@BindTag(tagId)"
+                                           @onchange="(ChangeEventArgs e) => BindTag(tagId, Convert.ToBoolean(e.Value))" />
                                     <label class="form-check-label" for="tag_@tagId">
                                         @tagName
                                     </label>
@@ -196,18 +197,9 @@ else
                     }
                 </div>
             }
-
-            <button class="btn btn-primary w-100 w-md-auto" @onclick="SaveUserDefaultTags" disabled="@isSavingTags">
-                @(isSavingTags ? "Mentés..." : "Default tagek mentése")
-            </button>
         }
 
         <hr />
-
-        <form method="post" action="/auth/logout-form">
-            <input type="hidden" name="returnUrl" value="/profile" />
-            <button type="submit" class="btn btn-outline-danger w-100 w-md-auto">Kijelentkezés</button>
-        </form>
     </div>
 }
 
@@ -232,6 +224,7 @@ else
     private List<SharedModels.Tags> allTags = new();
     private Dictionary<string, string[]> tagsByCategory = new();
     private Dictionary<string, int> tagNameToId = new();
+
     private HashSet<int> selectedTagIds = new();
 
     private List<SharedModels.Recipes> userRecipes = new();
@@ -299,11 +292,6 @@ else
         {
             recipesMessage = $"A receptek betöltése sikertelen: {ex.Message}";
         }
-    }
-
-    private void EditRecipe(int recipeId)
-    {
-        Navigation.NavigateTo($"/recipeedit/{recipeId}");
     }
 
     private async Task DeleteRecipe(int recipeId)
@@ -380,10 +368,10 @@ else
         try
         {
             allTags = await Http.GetFromJsonAsync<List<SharedModels.Tags>>("api/tags/all")
-                      ?? new List<SharedModels.Tags>();
+                ?? new List<SharedModels.Tags>();
 
             tagsByCategory = await Http.GetFromJsonAsync<Dictionary<string, string[]>>("api/tags/byCategories")
-                             ?? new Dictionary<string, string[]>();
+                ?? new Dictionary<string, string[]>();
 
             tagNameToId = allTags
                 .GroupBy(t => t.tag_name)
@@ -423,18 +411,21 @@ else
         }
     }
 
-    private void OnTagChanged(int tagId, ChangeEventArgs e)
+    private void ToggleCategory(string categoryName)
     {
-        var isChecked = e.Value?.ToString() == "true";
-
-        if (isChecked)
+        if (collapsedCategories.Contains(categoryName))
         {
-            selectedTagIds.Add(tagId);
+            collapsedCategories.Remove(categoryName);
         }
         else
         {
-            selectedTagIds.Remove(tagId);
+            collapsedCategories.Add(categoryName);
         }
+    }
+
+    private bool IsCategoryCollapsed(string categoryName)
+    {
+        return collapsedCategories.Contains(categoryName);
     }
 
     private async Task RegisterUser()
@@ -520,23 +511,6 @@ else
         {
             isSavingTags = false;
         }
-    }
-
-    private void ToggleCategory(string categoryName)
-    {
-        if (collapsedCategories.Contains(categoryName))
-        {
-            collapsedCategories.Remove(categoryName);
-        }
-        else
-        {
-            collapsedCategories.Add(categoryName);
-        }
-    }
-
-    private bool IsCategoryCollapsed(string categoryName)
-    {
-        return collapsedCategories.Contains(categoryName);
     }
 
     private class SaveUserDefaultTagsRequest

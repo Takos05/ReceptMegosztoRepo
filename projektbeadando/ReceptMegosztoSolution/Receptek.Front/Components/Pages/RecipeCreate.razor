@@ -242,7 +242,7 @@ else
 
                 if (createdRecipe is not null)
                 {
-                    Navigation.NavigateTo($"/receptek/{createdRecipe.recipe_id}");
+                    Navigation.NavigateTo($"/receptek/{createdRecipe.recipe_id}", forceLoad: true);
                     return;
                 }
 
