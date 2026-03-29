@@ -6,17 +6,21 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddControllers(); 
+builder.Services.AddControllers();
+
+var apiBaseUrl = builder.Configuration["Api:BaseUrl"]
+                 ?? throw new InvalidOperationException("Api:BaseUrl nincs beállítva.");
 
 builder.Services.AddHttpClient("api", client =>
 {
-    client.BaseAddress = new Uri("https://localhost:44319/");
+    client.BaseAddress = new Uri(apiBaseUrl);
+    client.Timeout = TimeSpan.FromSeconds(30);
 });
 
-builder.Services.AddScoped(sp => new HttpClient
+builder.Services.AddScoped(sp => 
 {
-    BaseAddress = new Uri("https://localhost:44319/"),
-    Timeout = TimeSpan.FromSeconds(30) 
+    var factory = sp.GetRequiredService<IHttpClientFactory>();
+    return factory.CreateClient("api");
 });
 
 
@@ -24,7 +28,10 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     .AddCookie(options => 
     {
         options.LoginPath = "/login"; 
-        options.AccessDeniedPath = "/access-denied"; 
+        options.AccessDeniedPath = "/access-denied";
+        options.Cookie.HttpOnly = true;
+        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+        options.SlidingExpiration = true;
     });
 
 builder.Services.AddAuthorization(); 

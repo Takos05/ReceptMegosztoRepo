@@ -18,8 +18,8 @@
 }
 else if (!isAuthenticated)
 {
-    <div class="row g-4">
-        <div class="col-md-6">
+    <div class="row g-4 profile-aut-layout">
+        <div class="col-12 col-lg-6">
             <div class="card shadow-sm h-100">
                 <div class="card-body">
                     <h4 class="mb-3">Bejelentkezés</h4>
@@ -48,7 +48,7 @@ else if (!isAuthenticated)
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-12 col-lg-6">
             <div class="card shadow-sm h-100">
                 <div class="card-body">
                     <h4 class="mb-3">Regisztráció</h4>
@@ -95,7 +95,7 @@ else
 
         <hr />
 
-        <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-3">
             <h5 class="mb-0">Saját receptjeim</h5>
             <a href="@($"/recipecreate")" class="text-decoration-none text-dark">
                 Új recept készítése
@@ -123,7 +123,7 @@ else
                                 @recipe.title
                             </a>
 
-                            <div class="d-flex gap-2">
+                            <div class="d-flex gap-2 flex-column flex-sm-row">
                                 <a class="btn btn-outline-primary btn-sm"
                                    href="@($"/receptek/{recipe.recipe_id}")">
                                     Megnyitás
@@ -197,7 +197,7 @@ else
                 </div>
             }
 
-            <button class="btn btn-primary" @onclick="SaveUserDefaultTags" disabled="@isSavingTags">
+            <button class="btn btn-primary w-100 w-md-auto" @onclick="SaveUserDefaultTags" disabled="@isSavingTags">
                 @(isSavingTags ? "Mentés..." : "Default tagek mentése")
             </button>
         }
@@ -206,7 +206,7 @@ else
 
         <form method="post" action="/auth/logout-form">
             <input type="hidden" name="returnUrl" value="/profile" />
-            <button type="submit" class="btn btn-outline-danger">Kijelentkezés</button>
+            <button type="submit" class="btn btn-outline-danger w-100 w-md-auto">Kijelentkezés</button>
         </form>
     </div>
 }

@@ -1,14 +1,14 @@
 .top-nav {
     display: flex;
-    align-items: center;
     gap: 10px;
     flex-wrap: wrap;
 }
 
     .top-nav ::deep a {
         color: white;
+        display: block;
         text-decoration: none;
-        padding: 10px 14px;
+        padding: 12px 14px;
         border-radius: 12px;
         font-size: 0.95rem;
         font-weight: 500;
@@ -25,3 +25,16 @@
             background-color: rgba(255, 255, 255, 0.22);
             color: white;
         }
+
+@media (max-width: 991.98px) {
+    .top-nav {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+        .top-nav ::deep a {
+            width: 100%;
+            font-size: 1rem;
+            padding: 14px;
+        }
+}

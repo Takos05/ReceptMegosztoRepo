@@ -1,9 +1,12 @@
 ﻿@page "/recipeedit/{id:int}"
+
 @using System.ComponentModel.DataAnnotations
 @using System.Net.Http.Json
 @using SharedModels = ReceptekLibrary.MODELL
+
 @inject HttpClient Http
 @inject NavigationManager Navigation
+
 @rendermode InteractiveServer
 
 <PageTitle>Recept szerkesztése</PageTitle>
@@ -34,59 +37,87 @@ else
                 </div>
 
                 <div class="row">
-
                     <div class="col-md-4 mb-3">
-                        <label>Előkészítési idő</label>
+                        <label class="form-label">Előkészítési idő</label>
                         <InputNumber class="form-control" @bind-Value="model.PrepTimeMin" />
                     </div>
 
                     <div class="col-md-4 mb-3">
-                        <label>Főzési idő</label>
+                        <label class="form-label">Főzési idő</label>
                         <InputNumber class="form-control" @bind-Value="model.CookTimeMin" />
                     </div>
 
                     <div class="col-md-4 mb-3">
-                        <label>Adag</label>
+                        <label class="form-label">Adag</label>
                         <InputNumber class="form-control" @bind-Value="model.Servings" />
                     </div>
-
                 </div>
 
                 <hr />
 
                 <h5>Tagek</h5>
 
-<div style="background:white; color:black; padding:15px; border-radius:6px; max-height:400px; overflow:auto;">
+                @if (!string.IsNullOrWhiteSpace(tagsMessage))
+                {
+                    <p>@tagsMessage</p>
+                }
 
-@foreach (var category in allTags.GroupBy(t => t.category))
-{
-    <div class="mb-3">
+                @if (tagsByCategory.Count == 0)
+                {
+                    <p>Nincsenek elérhető tagek.</p>
+                }
+                else
+                {
+                    @foreach (var category in tagsByCategory.OrderBy(c => c.Key))
+                    {
+                        var isCollapsed = IsCategoryCollapsed(category.Key);
 
-        <b style="color:black;">Kategória @category.Key</b>
+                        <div class="mb-3 border rounded">
+                            <button type="button"
+                                    class="btn w-100 text-start fw-bold"
+                                    @onclick="() => ToggleCategory(category.Key)">
+                                @(isCollapsed ? "►" : "▼") @category.Key
+                            </button>
 
-        @foreach (var tag in category)
-        {
-            <div class="form-check">
+                            @if (!isCollapsed)
+                            {
+                                <div class="p-3 pt-2">
+                                    @foreach (var tagName in category.Value.OrderBy(t => t))
+                                    {
+                                        if (!tagNameToId.ContainsKey(tagName))
+                                        {
+                                            continue;
+                                        }
 
-                <input type="checkbox"
-                       class="form-check-input"
-                       checked="@tag_ids.Contains(tag.tag_id)"
-                       @onchange="() => ToggleTag(tag.tag_id)" />
+                                        var tagId = tagNameToId[tagName];
 
-                <label class="form-check-label" style="color:black; font-weight:500;">
-                    @tag.name
-                </label>
+                                        <div class="form-check">
+                                            <input type="checkbox"
+                                                   class="form-check-input"
+                                                   id="tag_@tagId"
+                                                   checked="@selectedTagIds.Contains(tagId)"
+                                                   @onclick="() => ToggleTag(tagId)" />
 
-            </div>
-        }
+                                            <label class="form-check-label" for="tag_@tagId">
+                                                @tagName
+                                            </label>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    }
+                }
 
-    </div>
-}
+                @if (!string.IsNullOrWhiteSpace(message))
+                {
+                    <div class="alert alert-info mt-3">@message</div>
+                }
 
-</div>
-
-                <button class="btn btn-success mt-3" disabled="@isSaving">
-                    Mentés
+                <button type="submit"
+                        class="btn btn-success mt-3"
+                        disabled="@isSaving">
+                    @(isSaving ? "Mentés..." : "Mentés")
                 </button>
 
                 <a class="btn btn-secondary ms-2 mt-3" href="/profile">
@@ -94,68 +125,92 @@ else
                 </a>
 
             </EditForm>
-
         </div>
     </div>
 }
 
 @code {
-
-    [Parameter]
-    public int id { get; set; }
+    [Parameter] public int id { get; set; }
 
     private bool isLoading = true;
     private bool isSaving = false;
 
+    private string message = string.Empty;
+    private string tagsMessage = string.Empty;
+
     private RecipeEditModel model = new();
 
-    private List<Tag> allTags = new();
-    private List<int> tag_ids = new();
+    private List<SharedModels.Tags> allTags = new();
+    private Dictionary<string, string[]> tagsByCategory = new();
+    private Dictionary<string, int> tagNameToId = new();
 
+    private HashSet<int> selectedTagIds = new();
     private HashSet<string> collapsedCategories = new();
 
     protected override async Task OnInitializedAsync()
     {
-        await LoadAllTags();
+        await LoadTags();
         await LoadRecipe();
         isLoading = false;
     }
 
-    private async Task LoadAllTags()
+    private async Task LoadTags()
     {
-        allTags = await Http.GetFromJsonAsync<List<Tag>>("api/tags/all");
+        try
+        {
+            allTags = await Http.GetFromJsonAsync<List<SharedModels.Tags>>("api/tags/all")
+                      ?? new List<SharedModels.Tags>();
+
+            tagsByCategory = await Http.GetFromJsonAsync<Dictionary<string, string[]>>("api/tags/byCategories")
+                               ?? new Dictionary<string, string[]>();
+
+            tagNameToId = allTags
+                .GroupBy(t => t.tag_name)
+                .ToDictionary(g => g.Key, g => g.First().tag_id);
+        }
+        catch (Exception ex)
+        {
+            tagsMessage = $"A tagek betöltése sikertelen: {ex.Message}";
+        }
     }
 
     private async Task LoadRecipe()
     {
-        var recipe = await Http.GetFromJsonAsync<SharedModels.Recipes>($"api/Recipe/Recipes/{id}");
-
-        if (recipe != null)
+        try
         {
-            model.Title = recipe.title;
-            model.Description = recipe.description;
-            model.PrepTimeMin = recipe.prep_time_min;
-            model.CookTimeMin = recipe.cook_time_min;
-            model.Servings = recipe.servings;
+            var recipe = await Http.GetFromJsonAsync<SharedModels.Recipes>($"api/recipe/Recipes/{id}");
+
+            if (recipe != null)
+            {
+                model.Title = recipe.title;
+                model.Description = recipe.description;
+                model.PrepTimeMin = recipe.prep_time_min;
+                model.CookTimeMin = recipe.cook_time_min;
+                model.Servings = recipe.servings;
+            }
+
+            var recipeTags = await Http.GetFromJsonAsync<List<SharedModels.Tags>>($"api/tags/byRecipe/{id}")
+                             ?? new List<SharedModels.Tags>();
+
+            selectedTagIds = recipeTags
+                .Select(t => t.tag_id)
+                .ToHashSet();
         }
-
-        var recipeTags = await Http.GetFromJsonAsync<List<int>>($"api/Recipe/{id}/tags");
-
-        if (recipeTags != null)
+        catch (Exception ex)
         {
-            tag_ids = recipeTags;
+            message = $"A recept betöltése sikertelen: {ex.Message}";
         }
     }
 
     private void ToggleTag(int tagId)
     {
-        if (tag_ids.Contains(tagId))
+        if (selectedTagIds.Contains(tagId))
         {
-            tag_ids.Remove(tagId);
+            selectedTagIds.Remove(tagId);
         }
         else
         {
-            tag_ids.Add(tagId);
+            selectedTagIds.Add(tagId);
         }
     }
 
@@ -178,51 +233,61 @@ else
 
     private async Task UpdateRecipe()
     {
+        if (isSaving) return;
+
         isSaving = true;
+        message = string.Empty;
 
-        var updatedRecipe = new SharedModels.Recipes
+        try
         {
-            recipe_id = id,
-            title = model.Title,
-            description = model.Description,
-            prep_time_min = model.PrepTimeMin,
-            cook_time_min = model.CookTimeMin,
-            servings = model.Servings
-        };
+            var updatedRecipe = new SharedModels.Recipes
+                {
+                    recipe_id = id,
+                    title = model.Title,
+                    description = model.Description,
+                    prep_time_min = model.PrepTimeMin,
+                    cook_time_min = model.CookTimeMin,
+                    servings = model.Servings
+                };
 
-        var response = await Http.PutAsJsonAsync($"api/Recipe/Recipes/{id}", updatedRecipe);
+            var response = await Http.PutAsJsonAsync($"api/recipe/Recipes/{id}", updatedRecipe);
 
-        if (response.IsSuccessStatusCode)
-        {
-            await Http.PutAsJsonAsync($"api/Recipe/{id}/tags", tag_ids);
+            if (!response.IsSuccessStatusCode)
+            {
+                message = "A recept mentése sikertelen.";
+                return;
+            }
+
+            var tagsResponse = await Http.PutAsJsonAsync($"api/recipe/{id}/tags", selectedTagIds.ToList());
+
+            if (!tagsResponse.IsSuccessStatusCode)
+            {
+                message = "A tagek mentése sikertelen.";
+                return;
+            }
+
             Navigation.NavigateTo($"/receptek/{id}");
         }
-
-        isSaving = false;
+        catch (Exception ex)
+        {
+            message = $"Hiba történt: {ex.Message}";
+        }
+        finally
+        {
+            isSaving = false;
+        }
     }
 
     private class RecipeEditModel
     {
+        [Required(ErrorMessage = "A cím kötelező.")]
+        public string Title { get; set; } = string.Empty;
 
-        [Required]
-        public string Title { get; set; } = "";
-
-        [Required]
-        public string Description { get; set; } = "";
+        [Required(ErrorMessage = "A leírás kötelező.")]
+        public string Description { get; set; } = string.Empty;
 
         public int PrepTimeMin { get; set; }
-
         public int CookTimeMin { get; set; }
-
-        public int Servings { get; set; }
-
+        public int Servings { get; set; } = 1;
     }
-
-    private class Tag
-    {
-        public int tag_id { get; set; }
-        public string name { get; set; } = "";
-        public string category { get; set; } = "";
-    }
-
 }

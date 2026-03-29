@@ -6,7 +6,7 @@
 @using System.Linq
 
 
-
+<div class="recipes-page">
 <input class="form-control mb-3"
        placeholder="Keresés recept név alapján..."
        @bind="searchText"
@@ -18,9 +18,10 @@
 }
 else if (FilteredRecipes?.Count > 0)
 {
+    <div class="recipes-grid">
     @foreach (var recept in FilteredRecipes)
     {
-        <div class="card mb-3">
+        <div class="card recipe-card">
             <a href="@($"/receptek/{recept.recipe_id}")" class="text-decoration-none text-dark">
                 <div class="card-body">
                     <h5 class="card-title">@recept.title</h5>
@@ -30,7 +31,9 @@ else if (FilteredRecipes?.Count > 0)
             </a>
         </div>
     }
+    </div>
 }
+</div>
 else
 {
     <p>No recipes found.</p>

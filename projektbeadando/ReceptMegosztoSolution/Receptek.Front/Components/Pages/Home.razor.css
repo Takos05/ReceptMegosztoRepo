@@ -1,0 +1,56 @@
+﻿.hero-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 8px 16px 20px;
+}
+
+.hero-box {
+    width: 100%;
+    min-height: 360px;
+    border-radius: 20px;
+    overflow: hidden;
+    color: white;
+}
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.hero-content {
+    color: white;
+    width: 100%;
+    max-width: 420px;
+}
+
+@media (max-width: 767.98px) {
+    .hero-wrapper {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+    }
+
+    .hero-box {
+        min-height: 260px;
+    }
+
+    .overlay {
+        padding: 18px;
+    }
+
+    .w-100-mobile {
+        width: 100%;
+    }
+}
+
+.info-section {
+    background-color: darkgrey;
+    color: white;
+}

@@ -4,20 +4,7 @@
 
 <div class="page-layout">
     <header class="top-header">
-        <div class="top-header-left">
-            <AuthorizeView>
-                <Authorized>
-                    <span>🟢 Bejelentkezve: <strong>@context.User.Identity?.Name</strong></span>
-                </Authorized>
-                <NotAuthorized>
-                    <span>⚪ Nincs bejelentkezve</span>
-                </NotAuthorized>
-            </AuthorizeView>
-        </div>
-
-        <div class="top-header-right">
-            <NavMenu @rendermode="InteractiveServer" />
-        </div>
+        <TopNavbar />
     </header>
 
     <main class="main-content">

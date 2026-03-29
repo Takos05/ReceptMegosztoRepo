@@ -1,0 +1,9 @@
+﻿.profile-card {
+    border-radius: 18px;
+}
+
+@media (max-width: 575.98px) {
+    .profile-card .list-group-item {
+        padding: 12px;
+    }
+}

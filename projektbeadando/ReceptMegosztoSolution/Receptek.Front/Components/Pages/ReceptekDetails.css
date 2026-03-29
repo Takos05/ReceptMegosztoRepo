@@ -1,0 +1,14 @@
+﻿.details-page .card {
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.details-list {
+    padding-left: 18px;
+}
+
+@media (max-width: 575.98px) {
+    .details-page .card-body {
+        padding: 14px;
+    }
+}

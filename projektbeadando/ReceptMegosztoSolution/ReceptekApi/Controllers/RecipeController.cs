@@ -18,7 +18,7 @@ namespace ReceptekApi.Controllers
             _context = context;
         }
 
-        [HttpGet()]
+        [HttpGet]
         public async Task<IActionResult> GetRecipes()
         {
             var recipes = await _context.Recipes.ToListAsync();

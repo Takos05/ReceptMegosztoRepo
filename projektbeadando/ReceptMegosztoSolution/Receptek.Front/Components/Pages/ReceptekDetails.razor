@@ -46,8 +46,8 @@ else
             }
             else
             {
-                <div class="d-flex align-items-center gap-3">
-                    <div style="font-size: 2rem; line-height: 1;">
+                <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center gap-3">
+                    <div style="font-size: 2rem; line-height: 1; word-break: keep-all;">
                         @for (int i = 1; i <= 5; i++)
                         {
                             if (i <= roundedStars)
@@ -97,7 +97,7 @@ else
                 }
 
                 <!-- Mentés -->
-                <button class="btn btn-primary"
+                <button class="btn btn-primary w-100 w-sm-auto"
                         @onclick="SaveRating"
                         disabled="@ratingSubmitting">
                     @(currentUserRating == null ? "Értékelés mentése" : "Értékelés módosítása")
@@ -132,7 +132,7 @@ else
                       placeholder="Írd ide a véleményed..."
                       rows="4"></textarea>
 
-            <button class="btn btn-primary mt-2" @onclick="KommentKuldes">
+                    <button class="btn btn-primary mt-2 w-100 w-sm-auto" @onclick="KommentKuldes">
                 Küldés
             </button>
         
@@ -188,7 +188,7 @@ else
         </div>
     </div>
 
-    <a class="btn btn-secondary" href="/receptek">Vissza a listához</a>
+    <a class="btn btn-secondary w-100 w-sm-auto" href="/receptek">Vissza a listához</a>
 }
 
 @code {

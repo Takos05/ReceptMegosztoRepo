@@ -1,0 +1,40 @@
+﻿@rendermode InteractiveServer
+@using Microsoft.AspNetCore.Components.Authorization
+
+<div class="top-header-row">
+    <div class="top-header-left">
+        <AuthorizeView>
+            <Authorized>
+                <span class="login-state">
+                    Bejelentkezve: <strong>@context.User.Identity?.Name</strong>
+                </span>
+            </Authorized>
+            <NotAuthorized>
+                <span class="login-state">Nincs bejelentkezve</span>
+            </NotAuthorized>
+        </AuthorizeView>
+    </div>
+
+    <nav class="top-navbar desktop-nav">
+        <NavMenu />
+    </nav>
+
+    <button class="mobile-menu-toggle"
+            type="button"
+            @onclick="ToggleMenu">
+        ☰
+    </button>
+</div>
+
+<nav class="top-navbar mobile-nav @(isMenuOpen ? "open" : "")">
+    <NavMenu />
+</nav>
+
+@code {
+    private bool isMenuOpen;
+
+    private void ToggleMenu()
+    {
+        isMenuOpen = !isMenuOpen;
+    }
+}

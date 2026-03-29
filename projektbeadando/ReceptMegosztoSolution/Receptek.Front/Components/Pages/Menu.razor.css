@@ -1,28 +1,107 @@
 ﻿.menuBody {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr);
+    grid-template-areas: "sidebar content";
+    align-items: start;
     width: 100%;
     gap: 20px;
-    padding: 20px;
+    padding: 0;
     box-sizing: border-box;
 }
 
-/* Sidebar */
 .tagekSidebar {
-    width: 250px;
-    min-width: 250px;
-    max-height: 90vh;
+    grid-area: sidebar;
+    position: sticky;
+    top: 80px;
+    width: 100%;
+    max-height: calc(100vh - 100px);
     overflow-y: auto;
     padding: 15px;
     border: 1px solid #ccc;
-    border-radius: 8px;
+    border-radius: 14px;
     background: #fafafa;
 }
 
-/* Table container */
+/* Menü tartalom */
 .menuTableDiv {
-    flex-grow: 1;
-    min-width: 0; /* CRITICAL for flex layouts */
+    grid-area: content;
+    width: 100%;
     overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 14px;
+    background: white;
+    padding: 10px;
+}
+
+.menuTable {
+    width: max-content;
+    min-width: 100%;
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+
+    .menuTable th,
+    .menuTable td {
+        min-width: 0;
+        vertical-align: top;
+    }
+
+    .menuTable th {
+        white-space: nowrap;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        background: white;
+    }
+
+/* Kártyák */
+.menucard {
+    display: inline-block;
+    width: max-content;
+    max-width: 260px;
+    border: 1px solid #e5e5e5;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,.06);
+}
+
+    .menucard .card-body {
+        padding: 14px;
+    }
+
+    .menucard .card-title {
+        white-space: nowrap;
+        display: inline-block;
+    }
+
+    .menucard .card-text {
+        white-space: normal;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        max-width: 240px;
+    }
+
+@media (max-width: 991.98px) {
+    .menuBody {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "content"
+            "sidebar";
+    }
+
+    .tagekSidebar {
+        position: static;
+        max-height: none;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .menuTableDiv {
+        padding: 8px;
+    }
+
+    .menucard {
+        max-width: 220px;
+    }
 }
