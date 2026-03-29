@@ -25,6 +25,7 @@ else if (FilteredRecipes?.Count > 0)
             <a href="@($"/receptek/{recept.recipe_id}")" class="text-decoration-none text-dark">
                 <div class="card-body">
                     <h5 class="card-title">@recept.title</h5>
+                    <p>@felhasznalok.Find(x => x.user_id == recept.user_id).username</p>
                     <p class="card-text">@recept.description</p>
                     <p>Értékelés: ⭐ @GetRating(recept.recipe_id)</p>
                 </div>
@@ -41,6 +42,7 @@ else
 
 @code {
 
+    List<Users> felhasznalok = new();
     List<Recipes> serverRecipes = new();
     List<Recipes> FilteredRecipes = new();
     Dictionary<int, double> ratings = new();
@@ -81,10 +83,10 @@ else
         try
         {
             var response = await Http.GetAsync("/api/Recipe");
-
             if (response.IsSuccessStatusCode)
             {
                 serverRecipes = await response.Content.ReadFromJsonAsync<List<Recipes>>() ?? new List<Recipes>();
+                felhasznalok = await Http.GetFromJsonAsync<List<Users>>("/api/User") ?? new List<Users>();
                 FilteredRecipes = serverRecipes;
 
                 foreach (var recipe in serverRecipes)
