@@ -15,7 +15,7 @@
 @if (!string.IsNullOrEmpty(errorMessage))
 {
     <div class="alert alert-danger">@errorMessage</div>
-}
+    }
 else if (FilteredRecipes?.Count > 0)
 {
     <div class="recipes-grid">
@@ -35,10 +35,7 @@ else if (FilteredRecipes?.Count > 0)
     </div>
 }
 </div>
-else
-{
-    <p>No recipes found.</p>
-}
+
 
 @code {
 
@@ -116,4 +113,3 @@ else
         }
     }
 }
-```

@@ -4,6 +4,7 @@
 @using System.Net
 @using System.Net.Http.Json
 @rendermode InteractiveServer
+@inject NavigationManager Navigation
 @using Microsoft.AspNetCore.Components.Authorization
 @inject AuthenticationStateProvider AuthStateProvider
 @using System.Security.Claims
@@ -35,7 +36,19 @@ else
             </ul>
         </div>
     </div>
-
+    @if (CanDeleteRecipe(recipe))
+    {
+        <div class="card mb-4">
+            <button class="btn btn-outline-danger btn-sm .bg-danger .text-secondary"
+                    @onclick="() => DeleteRecipe(recipe.recipe_id)">
+                Törlés
+            </button>
+            <a class="btn btn-outline-warning btn-sm .bg-warning .text-light"
+               href="@($"/recipeedit/{recipe.recipe_id}")">
+                Szerkesztés
+            </a>
+        </div>
+    }
     <!-- Értékelés -->
     <div class="card mb-4">
         <div class="card-body">
@@ -225,6 +238,8 @@ else
 
     private bool ratingSubmitting = false;
     private string? ratingSuccessMessage;
+
+    private bool isDeletingRecipe = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -443,6 +458,17 @@ else
         return currentUserId != null && comment.user_id == currentUserId.Value;
     }
 
+    private bool CanDeleteRecipe(Recipes recipe)
+    {
+        if (!isLoggedIn)
+            return false;
+
+        if (isAdmin)
+            return true;
+
+        return currentUserId != null && recipe.user_id == currentUserId.Value;
+    }
+
     private async Task DeleteComment(int commentId)
     {
         if (!isLoggedIn)
@@ -566,6 +592,32 @@ else
         finally
         {
             ratingSubmitting = false;
+        }
+    }
+    private async Task DeleteRecipe(int recipeId)
+    {
+        if (isDeletingRecipe)
+            return;
+
+        isDeletingRecipe = true;
+
+        try
+        {
+            var response = await Http.DeleteAsync($"api/recipe/{recipeId}");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorText = await response.Content.ReadAsStringAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            
+        }
+        finally
+        {
+            isDeletingRecipe = false;
+            Navigation.NavigateTo("/receptek", forceLoad: true);
         }
     }
 }
